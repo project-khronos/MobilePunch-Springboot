@@ -8,26 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.lang.NonNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-public class Client {
+public class ProjectEntity {
 
   @Id
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column(name = "client_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
+  @Column(name = "project_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   UUID uuid;
-  @NonNull
-  String name;
-  @NonNull
-  String phone;
-  String optionalPhone;
-  String email;
+  long startTime;
+  long endTime;
   @JoinColumn(name = "address_id", nullable = false, updatable = false)
-  String adress;
-  @Column(length = 4096, nullable = true)
-  String notes;
+  String address;
+
 
 }
