@@ -1,12 +1,14 @@
 package edu.cnm.projectkronos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
@@ -25,8 +27,9 @@ public class ClientEntity {
   private String phone;
   private String optionalPhone;
   private String email;
+  @ManyToMany
   @JoinColumn(name = "address_id", nullable = false)
-  private AddresEntity address;
+  private List<AddressEntity> address;
   @Column(length = 4096, nullable = true)
   private String notes;
 
@@ -70,11 +73,11 @@ public class ClientEntity {
     this.email = email;
   }
 
-  public AddresEntity getAddress() {
+  public List<AddressEntity> getAddress() {
     return address;
   }
 
-  public void setAddress(AddresEntity address) {
+  public void setAddress(List<AddressEntity> address) {
     this.address = address;
   }
 

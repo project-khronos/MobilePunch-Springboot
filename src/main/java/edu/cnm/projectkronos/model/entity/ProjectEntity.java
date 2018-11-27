@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -20,6 +21,7 @@ public class ProjectEntity {
   private UUID uuid;
   private long startTime;
   private long endTime;
+  @ManyToOne
   @JoinColumn(name = "client_id")
   private ClientEntity client;
 

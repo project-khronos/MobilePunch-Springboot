@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
@@ -24,13 +25,15 @@ public class EventEntity {
   private long startTime;
   private long endTime;
   private double miles;
+  @ManyToOne
   @JoinColumn(name = "equipment_id")
   private EquipmentEntity equipmentId;
   private double credit;
   @NonNull
   private double expenses;
+  @ManyToOne
   @JoinColumn(name = "address_id")
-  private AddresEntity address;
+  private AddressEntity address;
 
   public UUID getUuid() {
     return uuid;
@@ -96,11 +99,11 @@ public class EventEntity {
     this.equipmentId = equipmentId;
   }
 
-  public AddresEntity getAddress() {
+  public AddressEntity getAddress() {
     return address;
   }
 
-  public void setAddress(AddresEntity address) {
+  public void setAddress(AddressEntity address) {
     this.address = address;
   }
 }

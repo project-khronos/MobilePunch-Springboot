@@ -11,7 +11,7 @@ import org.springframework.lang.NonNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-public class AddresEntity {
+public class AddressEntity {
 
   @Id
   @GeneratedValue(generator = "uuid2")
