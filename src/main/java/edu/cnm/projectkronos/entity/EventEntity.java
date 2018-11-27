@@ -16,7 +16,7 @@ public class EventEntity {
   @Id
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column(name = "client_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
+  @Column(name = "event_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
   private long date;
@@ -26,7 +26,7 @@ public class EventEntity {
   private UUID equiptmentId;
   private double credit;
   @NonNull
-  private double expesnes;
+  private double expenses;
   @NonNull
   @Column(length = 1024, nullable = false, unique = true)
   private String location;
@@ -87,12 +87,12 @@ public class EventEntity {
     this.credit = credit;
   }
 
-  public double getExpesnes() {
-    return expesnes;
+  public double getExpenses() {
+    return expenses;
   }
 
-  public void setExpesnes(double expesnes) {
-    this.expesnes = expesnes;
+  public void setExpenses(double expenses) {
+    this.expenses = expenses;
   }
 
   public String getLocation() {
