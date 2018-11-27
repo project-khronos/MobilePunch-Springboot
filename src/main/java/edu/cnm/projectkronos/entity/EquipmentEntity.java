@@ -20,7 +20,7 @@ public class EquipmentEntity {
   private UUID uuid;
   @NonNull
   private String name;
-  private String licesnePlate;
+  private String licensePlate;
   private String serialNumber;
   private String make;
   private String model;
@@ -42,12 +42,12 @@ public class EquipmentEntity {
     this.name = name;
   }
 
-  public String getLicesnePlate() {
-    return licesnePlate;
+  public String getLicensePlate() {
+    return licensePlate;
   }
 
-  public void setLicesnePlate(String licesnePlate) {
-    this.licesnePlate = licesnePlate;
+  public void setLicensePlate(String licensePlate) {
+    this.licensePlate = licensePlate;
   }
 
   public String getSerialNumber() {

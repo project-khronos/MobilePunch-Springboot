@@ -20,8 +20,9 @@ public class ProjectEntity {
   private UUID uuid;
   private long startTime;
   private long endTime;
-  @JoinColumn(name = "address_id", nullable = false, updatable = false)
-  private String address;
+  @JoinColumn(name = "client_id")
+  private ClientEntity client;
+
 
   public UUID getUuid() {
     return uuid;
@@ -45,13 +46,5 @@ public class ProjectEntity {
 
   public void setEndTime(long endTime) {
     this.endTime = endTime;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
   }
 }

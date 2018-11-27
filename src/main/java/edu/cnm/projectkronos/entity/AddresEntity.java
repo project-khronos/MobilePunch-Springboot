@@ -22,7 +22,6 @@ public class AddresEntity {
   private String name;
   @NonNull
   private String StreetAddress;
-
   private String buildingNumber;
   @NonNull
   private String city;

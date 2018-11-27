@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
@@ -23,13 +24,13 @@ public class EventEntity {
   private long startTime;
   private long endTime;
   private double miles;
-  private UUID equipmentId;
+  @JoinColumn(name = "equipment_id")
+  private EquipmentEntity equipmentId;
   private double credit;
   @NonNull
   private double expenses;
-  @NonNull
-  @Column(length = 1024, nullable = false, unique = true)
-  private String location;
+  @JoinColumn(name = "address_id")
+  private AddresEntity address;
 
   public UUID getUuid() {
     return uuid;
@@ -71,14 +72,6 @@ public class EventEntity {
     this.miles = miles;
   }
 
-  public UUID getEquiptmentId() {
-    return equipmentId;
-  }
-
-  public void setEquiptmentId(UUID equiptmentId) {
-    this.equipmentId = equiptmentId;
-  }
-
   public double getCredit() {
     return credit;
   }
@@ -95,11 +88,19 @@ public class EventEntity {
     this.expenses = expenses;
   }
 
-  public String getLocation() {
-    return location;
+  public EquipmentEntity getEquipmentId() {
+    return equipmentId;
   }
 
-  public void setLocation(String location) {
-    this.location = location;
+  public void setEquipmentId(EquipmentEntity equipmentId) {
+    this.equipmentId = equipmentId;
+  }
+
+  public AddresEntity getAddress() {
+    return address;
+  }
+
+  public void setAddress(AddresEntity address) {
+    this.address = address;
   }
 }

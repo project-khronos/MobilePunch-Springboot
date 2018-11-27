@@ -25,8 +25,8 @@ public class ClientEntity {
   private String phone;
   private String optionalPhone;
   private String email;
-  @JoinColumn(name = "address_id", nullable = false, updatable = false)
-  private String address;
+  @JoinColumn(name = "address_id", nullable = false)
+  private AddresEntity address;
   @Column(length = 4096, nullable = true)
   private String notes;
 
@@ -70,12 +70,12 @@ public class ClientEntity {
     this.email = email;
   }
 
-  public String getAdress() {
+  public AddresEntity getAddress() {
     return address;
   }
 
-  public void setAdress(String adress) {
-    this.address = adress;
+  public void setAddress(AddresEntity address) {
+    this.address = address;
   }
 
   public String getNotes() {
