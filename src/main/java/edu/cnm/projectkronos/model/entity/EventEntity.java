@@ -1,4 +1,4 @@
-package edu.cnm.projectkronos.entity;
+package edu.cnm.projectkronos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.UUID;
