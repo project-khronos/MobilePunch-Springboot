@@ -17,11 +17,41 @@ public class ProjectEntity {
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
   @Column(name = "project_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
-  UUID uuid;
-  long startTime;
-  long endTime;
+  private UUID uuid;
+  private long startTime;
+  private long endTime;
   @JoinColumn(name = "address_id", nullable = false, updatable = false)
-  String address;
+  private String address;
 
+  public UUID getUuid() {
+    return uuid;
+  }
 
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
+
+  public long getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(long startTime) {
+    this.startTime = startTime;
+  }
+
+  public long getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(long endTime) {
+    this.endTime = endTime;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
 }
