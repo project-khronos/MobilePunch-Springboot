@@ -23,7 +23,7 @@ public class EventEntity {
   private long startTime;
   private long endTime;
   private double miles;
-  private UUID equiptmentId;
+  private UUID equipmentId;
   private double credit;
   @NonNull
   private double expenses;
@@ -72,11 +72,11 @@ public class EventEntity {
   }
 
   public UUID getEquiptmentId() {
-    return equiptmentId;
+    return equipmentId;
   }
 
   public void setEquiptmentId(UUID equiptmentId) {
-    this.equiptmentId = equiptmentId;
+    this.equipmentId = equiptmentId;
   }
 
   public double getCredit() {
