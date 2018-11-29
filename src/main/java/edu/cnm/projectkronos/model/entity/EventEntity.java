@@ -1,29 +1,34 @@
 package edu.cnm.projectkronos.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+@Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EventEntity {
 
   private static EntityLinks entityLinks;
 
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "event_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
@@ -34,6 +39,12 @@ public class EventEntity {
   private String description;
   private double latitude;
   private double longitude;
+
+  @ManyToOne(fetch = FetchType.LAZY,
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//  @JoinTable(joinColumns = @JoinColumn(name = "event_id"),
+//      inverseJoinColumns = @JoinColumn(name = "project_id"))
+  private ProjectEntity project;
 
   @PostConstruct
   private void initEntityLinks() {
@@ -79,6 +90,11 @@ public class EventEntity {
 
   public double getLongitude() {
     return longitude;
+  }
+
+  @JsonIgnore
+  public ProjectEntity getProject() {
+    return project;
   }
 
   public void setStartTime(Date startTime) {

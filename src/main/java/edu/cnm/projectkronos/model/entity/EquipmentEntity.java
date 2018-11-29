@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+@Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EquipmentEntity {
 
   private static EntityLinks entityLinks;
@@ -26,7 +28,7 @@ public class EquipmentEntity {
   private String Identification;
   private String make;
   private String model;
-  private String year;
+  private String mfcyear;
   private String description;
 
   @PostConstruct
@@ -64,7 +66,7 @@ public class EquipmentEntity {
   }
 
   public String getYear() {
-    return year;
+    return mfcyear;
   }
 
   public String getDescription() {
@@ -88,7 +90,7 @@ public class EquipmentEntity {
   }
 
   public void setYear(String year) {
-    this.year = year;
+    this.mfcyear = year;
   }
 
   public void setDescription(String description) {

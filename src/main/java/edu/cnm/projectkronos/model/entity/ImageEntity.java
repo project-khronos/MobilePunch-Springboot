@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.stereotype.Component;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+@Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ImageEntity {
 
   private static EntityLinks entityLinks;
