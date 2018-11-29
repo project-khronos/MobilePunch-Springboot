@@ -4,23 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import org.springframework.lang.NonNull;
+import org.hibernate.annotations.GenericGenerator;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-public class EquipmentEntity {
+public class ImageEntity {
 
   @Id
-  @Column(name = "equipment_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
+  @Column(name = "image_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
-  @NonNull
-  private String name;
-  @NonNull
-  private String Identification;
-  private String make;
-  private String model;
-  private String year;
   private String description;
 
 }
