@@ -16,10 +16,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.hateoas.EntityLinks;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 public class ProjectEntity {
+
+  private static EntityLinks entityLinks;
 
   @Id
   @Column(name = "project_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)

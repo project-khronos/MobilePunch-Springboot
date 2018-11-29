@@ -41,4 +41,5 @@ public class ClientEntity {
       inverseJoinColumns = @JoinColumn(name = "project_id"))
   private List<ProjectEntity> projects = new LinkedList<>();
 
+
 }
