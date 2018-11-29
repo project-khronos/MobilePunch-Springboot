@@ -41,10 +41,11 @@ public class ProjectController {
   public ProjectEntity get(@PathVariable("projectId") UUID projectId) {
     return projectRepository.findById(projectId).get();
   }
+// TODO figure out how to get a list of events associated with a project.
 
 //  @GetMapping(value = "{projectId}/events", produces = MediaType.APPLICATION_JSON_VALUE)
 //  public List<EventEntity> getEvents(@PathVariable("projectId") UUID projectId) {
 //
-//    return
+//    return get(projectId).getEvents
 //  }
 }
