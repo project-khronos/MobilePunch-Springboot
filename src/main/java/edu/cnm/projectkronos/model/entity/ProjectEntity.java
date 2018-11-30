@@ -12,22 +12,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.stereotype.Component;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+@Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectEntity {
 
   private static EntityLinks entityLinks;
 
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "project_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   private String name;
@@ -36,10 +38,16 @@ public class ProjectEntity {
   private Date expectedEndTime;
   private String description;
 
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projects",
+  @ManyToMany(fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   @OrderBy("name ASC")
   private List<ClientEntity> clients = new LinkedList<>();
+
+
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "uuid",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  private List<EventEntity> events = new LinkedList<>();
+
 
   @PostConstruct
   private void initEntityLinks() {
@@ -81,6 +89,10 @@ public class ProjectEntity {
 
   public List<ClientEntity> getClients() {
     return clients;
+  }
+
+  public List<EventEntity> getEvents() {
+    return events;
   }
 
   public void setName(String name) {

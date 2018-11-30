@@ -8,14 +8,17 @@ import edu.cnm.projectkronos.model.entity.ProjectEntity;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@ExposesResourceFor(ProjectEntity.class)
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
@@ -32,6 +35,13 @@ public class ProjectController {
     this.clientRepository = clientRepository;
   }
 
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<ProjectEntity> post(@RequestBody ProjectEntity project) {
+    projectRepository.save(project);
+    return ResponseEntity.created(project.getHref()).body(project);
+  }
+
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<ProjectEntity> list() {
     return projectRepository.findAllByOrderByStartTime();
@@ -41,11 +51,11 @@ public class ProjectController {
   public ProjectEntity get(@PathVariable("projectId") UUID projectId) {
     return projectRepository.findById(projectId).get();
   }
-// TODO figure out how to get a list of events associated with a project.
 
-//  @GetMapping(value = "{projectId}/events", produces = MediaType.APPLICATION_JSON_VALUE)
-//  public List<EventEntity> getEvents(@PathVariable("projectId") UUID projectId) {
-//
-//    return get(projectId).getEvents
-//  }
+  // TODO figure out how to get a list of events associated with a project.
+
+  @GetMapping(value = "{projectId}/events", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<EventEntity> getEvents(@PathVariable("projectId") UUID projectId) {
+    return get(projectId).getEvents();
+  }
 }
