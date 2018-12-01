@@ -44,7 +44,7 @@ public class ProjectEntity {
   private List<ClientEntity> clients = new LinkedList<>();
 
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "uuid",
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "uuid",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<EventEntity> events = new LinkedList<>();
 

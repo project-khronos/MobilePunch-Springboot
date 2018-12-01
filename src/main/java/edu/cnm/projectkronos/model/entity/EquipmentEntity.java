@@ -2,11 +2,18 @@ package edu.cnm.projectkronos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.net.URI;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -30,6 +37,12 @@ public class EquipmentEntity {
   private String model;
   private String mfcyear;
   private String description;
+
+  @ManyToMany(fetch = FetchType.LAZY,
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @JoinTable(joinColumns = @JoinColumn(name = "equipment_id"),
+      inverseJoinColumns = @JoinColumn(name = "event_id"))
+  private List<EventEntity> events = new LinkedList<>();
 
   @PostConstruct
   private void initEntityLinks() {
@@ -71,6 +84,14 @@ public class EquipmentEntity {
 
   public String getDescription() {
     return description;
+  }
+
+  public String getMfcyear() {
+    return mfcyear;
+  }
+
+  public List<EventEntity> getEvents() {
+    return events;
   }
 
   public void setName(String name) {
