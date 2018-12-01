@@ -1,15 +1,19 @@
 package edu.cnm.projectkronos.controller;
 
 import edu.cnm.projectkronos.model.dao.ClientRepository;
+import edu.cnm.projectkronos.model.dao.ProjectRepository;
 import edu.cnm.projectkronos.model.entity.ClientEntity;
+import edu.cnm.projectkronos.model.entity.ProjectEntity;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +29,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
 
   private ClientRepository clientRepository;
+  private ProjectRepository projectRepository;
 
   @Autowired
-  public ClientController(ClientRepository clientRepository) {
+  public ClientController(ClientRepository clientRepository, ProjectRepository projectRepository) {
     this.clientRepository = clientRepository;
+    this.projectRepository = projectRepository;
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -44,12 +50,25 @@ public class ClientController {
     return clientRepository.findAllByOrderByNameAsc();
   }
 
-  // FIXME returns status 500,  Missing URI template variable 'clientID' for method parameter of type UUID]
   // Get Client
   @GetMapping(value = "{clientId}")
-  public ClientEntity getClient(@PathVariable("clientID") UUID clientId) {
+  public ClientEntity getClient(@PathVariable("clientId") UUID clientId) {
     return clientRepository.findById(clientId).get();
   }
+
+  @Transactional
+  @DeleteMapping(value = "{clientId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteClient(@PathVariable("clientId") UUID clientId) {
+    ClientEntity client = getClient(clientId);
+    List<ProjectEntity> projects = client.getProjects();
+    for (ProjectEntity project : projects) {
+      client.getProjects().remove(project);
+    }
+    projectRepository.saveAll(projects);
+    clientRepository.delete(client);
+  }
+
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)
