@@ -4,7 +4,6 @@ import edu.cnm.projectkronos.model.dao.ClientRepository;
 import edu.cnm.projectkronos.model.dao.EventRepository;
 import edu.cnm.projectkronos.model.dao.ProjectRepository;
 import edu.cnm.projectkronos.model.entity.ClientEntity;
-import edu.cnm.projectkronos.model.entity.EquipmentEntity;
 import edu.cnm.projectkronos.model.entity.EventEntity;
 import edu.cnm.projectkronos.model.entity.ProjectEntity;
 import java.util.List;
@@ -59,8 +58,22 @@ public class ProjectController {
 
   // Get A Project
   @GetMapping(value = "{projectId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ProjectEntity get(@PathVariable("projectId") UUID projectId) {
+  public ProjectEntity getProject(@PathVariable("projectId") UUID projectId) {
     return projectRepository.findById(projectId).get();
+  }
+
+  // Post a client to project
+  @PostMapping(value = "{projectId}/clients", consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<ProjectEntity> postClient(@PathVariable("projectId") UUID projectId,
+      @RequestBody ClientEntity partialClient) {
+    ProjectEntity project = getProject(projectId);
+    ClientEntity client = clientRepository.findById(partialClient.getUuid()).get();
+    client.getProjects().add(project);
+    project.getClients().add(client);
+    clientRepository.save(client);
+    projectRepository.save(project);
+    return ResponseEntity.created(project.getHref()).body(project);
   }
 
   //FIXME Returns 500 status, 'INSERT on table 'EVENT_ENTITY' caused a violation of foreign key constraint'
@@ -69,17 +82,18 @@ public class ProjectController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<EventEntity> postEvent(@PathVariable("projectId") UUID projectId,
       @RequestBody EventEntity event) {
-    ProjectEntity projectEntity = get(projectId);
+    eventRepository.save(event);
+    ProjectEntity projectEntity = getProject(projectId);
     projectEntity.getEvents().add(event);
     event.setProject(projectEntity);
-    eventRepository.save(event);
+
     return ResponseEntity.created(event.getHref()).body(event);
   }
 
   // Get Events for a Project
   @GetMapping(value = "{projectId}/events", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<EventEntity> getEvents(@PathVariable("projectId") UUID projectId) {
-    return get(projectId).getEvents();
+    return getProject(projectId).getEvents();
   }
 
 //  @GetMapping(value = "{projectId}/{eventId}/equipment")
@@ -88,10 +102,23 @@ public class ProjectController {
 //
 //  }
 
-  // get Clients for project
+  // getProject Clients for project
   @GetMapping(value = "{projectId}/clients")
   public List<ClientEntity> getClients(@PathVariable("projectId") UUID projectId) {
-    return get(projectId).getClients();
+    return getProject(projectId).getClients();
+  }
+
+  @Transactional
+  @DeleteMapping(value = "{projectId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteProject(@PathVariable("projectId") UUID prjectId) {
+    ProjectEntity project = getProject(prjectId);
+    List<ClientEntity> clients = project.getClients();
+    for (ClientEntity client : clients) {
+      client.getProjects().remove(project);
+    }
+    clientRepository.saveAll(clients);
+    projectRepository.delete(project);
   }
 
 

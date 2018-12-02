@@ -3,7 +3,9 @@ package edu.cnm.projectkronos.controller;
 import edu.cnm.projectkronos.model.dao.ClientRepository;
 import edu.cnm.projectkronos.model.dao.EventRepository;
 import edu.cnm.projectkronos.model.dao.ProjectRepository;
+import edu.cnm.projectkronos.model.entity.EquipmentEntity;
 import edu.cnm.projectkronos.model.entity.EventEntity;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 import org.springframework.hateoas.ExposesResourceFor;
@@ -30,9 +32,16 @@ public class EventController {
     this.eventRepository = eventRepository;
   }
 
+  //Get event
   @GetMapping(value = "{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public EventEntity getEvent(@PathVariable("eventId") UUID eventId) {
     return eventRepository.findById(eventId).get();
+  }
+
+  // Get list of Equipment for an event
+  @GetMapping(value = "{eventId}/equipment", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<EquipmentEntity> equipment(@PathVariable("eventId") UUID eventId) {
+    return getEvent(eventId).getEquipment();
   }
 
 

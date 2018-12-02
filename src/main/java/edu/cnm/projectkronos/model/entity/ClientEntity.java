@@ -1,6 +1,8 @@
 package edu.cnm.projectkronos.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,7 +28,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClientEntity {
+public class ClientEntity implements BaseClient {
 
   private static EntityLinks entityLinks;
 
@@ -97,6 +99,7 @@ public class ClientEntity {
     return notes;
   }
 
+  @JsonSerialize(contentAs = BaseProject.class)
   public List<ProjectEntity> getProjects() {
     return projects;
   }

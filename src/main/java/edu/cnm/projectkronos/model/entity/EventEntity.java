@@ -1,7 +1,7 @@
 package edu.cnm.projectkronos.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
@@ -18,17 +18,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
-import org.springframework.hateoas.core.Relation;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EventEntity {
+public class EventEntity implements BaseEvent {
 
   private static EntityLinks entityLinks;
 
@@ -103,7 +100,7 @@ public class EventEntity {
     return longitude;
   }
 
-  @JsonIgnore
+
   public ProjectEntity getProject() {
     return project;
   }
@@ -112,7 +109,7 @@ public class EventEntity {
     this.project = project;
   }
 
-  @JsonIgnore
+  @JsonSerialize(contentAs = BaseEquipment.class)
   public List<EquipmentEntity> getEquipment() {
     return equipment;
   }

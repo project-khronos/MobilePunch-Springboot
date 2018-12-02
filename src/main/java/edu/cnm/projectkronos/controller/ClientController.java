@@ -37,6 +37,7 @@ public class ClientController {
     this.projectRepository = projectRepository;
   }
 
+  // Post a client
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ClientEntity> postClient(@RequestBody ClientEntity client) {
