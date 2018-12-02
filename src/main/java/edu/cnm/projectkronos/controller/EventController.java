@@ -11,10 +11,12 @@ import edu.cnm.projectkronos.model.entity.ProjectEntity;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import javax.transaction.Transactional;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,6 +64,17 @@ public class EventController {
     event.getEquipment().add(equipment);
     eventRepository.save(event);
     return ResponseEntity.created(event.getHref()).body(event);
+  }
+
+  @Transactional
+  @DeleteMapping(value = "{eventId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteEvent(@PathVariable("eventId") UUID eventId) {
+    EventEntity event = getEvent(eventId);
+    ProjectEntity project = projectRepository.findById(event.getProject().getUuid()).get();
+    project.getEvents().remove(event);
+    projectRepository.save(project);
+    eventRepository.delete(event);
   }
 
 
