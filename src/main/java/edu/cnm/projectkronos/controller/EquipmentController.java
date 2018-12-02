@@ -5,11 +5,13 @@ import edu.cnm.projectkronos.model.entity.EquipmentEntity;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +50,14 @@ public class EquipmentController {
   public ResponseEntity<EquipmentEntity> postEquipment(@RequestBody EquipmentEntity equipment) {
     equipmentRepository.save(equipment);
     return ResponseEntity.created(equipment.getHref()).body(equipment);
+  }
+
+  @Transactional
+  @DeleteMapping(value = "{equipmentId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteEquipment(@PathVariable("equipmentId") UUID equipmentId) {
+    EquipmentEntity equipment = getEquipment(equipmentId);
+    equipmentRepository.delete(equipment);
   }
 
 

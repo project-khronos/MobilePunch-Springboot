@@ -112,8 +112,8 @@ public class ProjectController {
   @Transactional
   @DeleteMapping(value = "{projectId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteProject(@PathVariable("projectId") UUID prjectId) {
-    ProjectEntity project = getProject(prjectId);
+  public void deleteProject(@PathVariable("projectId") UUID projectId) {
+    ProjectEntity project = getProject(projectId);
     List<ClientEntity> clients = project.getClients();
     for (ClientEntity client : clients) {
       client.getProjects().remove(project);
