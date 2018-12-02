@@ -57,6 +57,13 @@ public class ClientController {
     return clientRepository.findById(clientId).get();
   }
 
+  //Get list of projects for a client
+  @GetMapping(value = "{clientId}/projects")
+  public List<ProjectEntity> projects(@PathVariable("clientId") UUID clientId) {
+    return getClient(clientId).getProjects();
+  }
+
+  //Delete a client
   @Transactional
   @DeleteMapping(value = "{clientId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
