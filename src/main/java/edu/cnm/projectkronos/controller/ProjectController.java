@@ -102,12 +102,13 @@ public class ProjectController {
 //
 //  }
 
-  // getProject Clients for project
+  // Get Clients for project
   @GetMapping(value = "{projectId}/clients")
   public List<ClientEntity> getClients(@PathVariable("projectId") UUID projectId) {
     return getProject(projectId).getClients();
   }
 
+  //Delete a project
   @Transactional
   @DeleteMapping(value = "{projectId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)

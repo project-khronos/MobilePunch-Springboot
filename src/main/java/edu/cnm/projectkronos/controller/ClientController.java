@@ -57,9 +57,9 @@ public class ClientController {
     return clientRepository.findById(clientId).get();
   }
 
-  //Get list of projects for a client
+  //Get list of getProjects for a client
   @GetMapping(value = "{clientId}/projects")
-  public List<ProjectEntity> projects(@PathVariable("clientId") UUID clientId) {
+  public List<ProjectEntity> getProjects(@PathVariable("clientId") UUID clientId) {
     return getClient(clientId).getProjects();
   }
 
