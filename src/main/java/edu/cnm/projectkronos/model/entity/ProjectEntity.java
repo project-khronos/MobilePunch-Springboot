@@ -1,6 +1,7 @@
 package edu.cnm.projectkronos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
@@ -24,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProjectEntity {
+public class ProjectEntity implements BaseProject {
 
   private static EntityLinks entityLinks;
 
@@ -44,7 +45,7 @@ public class ProjectEntity {
   private List<ClientEntity> clients = new LinkedList<>();
 
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "uuid",
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "uuid",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<EventEntity> events = new LinkedList<>();
 
@@ -87,10 +88,12 @@ public class ProjectEntity {
     return description;
   }
 
+  @JsonSerialize(contentAs = BaseClient.class)
   public List<ClientEntity> getClients() {
     return clients;
   }
 
+  @JsonSerialize(contentAs = BaseEvent.class)
   public List<EventEntity> getEvents() {
     return events;
   }

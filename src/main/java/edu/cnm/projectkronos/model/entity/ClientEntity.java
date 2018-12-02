@@ -1,6 +1,8 @@
 package edu.cnm.projectkronos.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -20,14 +23,17 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-public class ClientEntity {
+@Component
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ClientEntity implements BaseClient {
 
   private static EntityLinks entityLinks;
 
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "client_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
@@ -93,6 +99,7 @@ public class ClientEntity {
     return notes;
   }
 
+  @JsonSerialize(contentAs = BaseProject.class)
   public List<ProjectEntity> getProjects() {
     return projects;
   }
