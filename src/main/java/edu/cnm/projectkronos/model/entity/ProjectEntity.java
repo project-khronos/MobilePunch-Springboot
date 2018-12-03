@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -30,10 +31,12 @@ public class ProjectEntity implements BaseProject {
   private static EntityLinks entityLinks;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @NonNull
   @Column(name = "project_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
+  @NonNull
   private String name;
+  @NonNull
   private Date startTime;
   private Date endTime;
   private Date expectedEndTime;
@@ -96,6 +99,10 @@ public class ProjectEntity implements BaseProject {
   @JsonSerialize(contentAs = BaseEvent.class)
   public List<EventEntity> getEvents() {
     return events;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public void setName(String name) {

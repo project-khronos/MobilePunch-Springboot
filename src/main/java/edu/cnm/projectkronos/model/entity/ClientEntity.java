@@ -33,7 +33,7 @@ public class ClientEntity implements BaseClient {
   private static EntityLinks entityLinks;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @NonNull
   @Column(name = "client_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
@@ -102,6 +102,10 @@ public class ClientEntity implements BaseClient {
   @JsonSerialize(contentAs = BaseProject.class)
   public List<ProjectEntity> getProjects() {
     return projects;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public void setName(String name) {

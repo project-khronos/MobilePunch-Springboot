@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -30,11 +31,10 @@ public class EventEntity implements BaseEvent {
   private static EntityLinks entityLinks;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @NonNull
   @Column(name = "event_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
-  // FIXME  NonNull turned off for testing purposes only
-  // @NonNull
+  @NonNull
   private Date startTime;
   private Date endTime;
   private BigDecimal expenses;
@@ -110,6 +110,10 @@ public class EventEntity implements BaseEvent {
   @JsonSerialize(contentAs = BaseEquipment.class)
   public List<EquipmentEntity> getEquipment() {
     return equipment;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public void setStartTime(Date startTime) {

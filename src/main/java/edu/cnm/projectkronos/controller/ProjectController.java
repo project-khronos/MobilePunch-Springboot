@@ -32,12 +32,14 @@ public class ProjectController {
 
   private ProjectRepository projectRepository;
   private ClientRepository clientRepository;
+  private EventRepository eventRepository;
 
   @Autowired
   public ProjectController(ProjectRepository projectRepository, EventRepository eventRepository,
       ClientRepository clientRepository) {
     this.projectRepository = projectRepository;
     this.clientRepository = clientRepository;
+    this.eventRepository = eventRepository;
   }
 
   // Post Project
@@ -74,15 +76,14 @@ public class ProjectController {
     return ResponseEntity.created(project.getHref()).body(project);
   }
 
-  //FIXME Returns 500 status, 'INSERT on table 'EVENT_ENTITY' caused a violation of foreign key constraint'
-// Post event to a project
+  // Post event to a project
   @PostMapping(value = "{projectId}/events", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<EventEntity> postEvent(@PathVariable("projectId") UUID projectId,
       @RequestBody EventEntity event) {
     ProjectEntity projectEntity = getProject(projectId);
     event.setProject(projectEntity);
-    projectRepository.save(projectEntity);
+    eventRepository.save(event);
     return ResponseEntity.created(event.getHref()).body(event);
   }
 
@@ -91,12 +92,6 @@ public class ProjectController {
   public List<EventEntity> getEvents(@PathVariable("projectId") UUID projectId) {
     return getProject(projectId).getEvents();
   }
-
-//  @GetMapping(value = "{projectId}/{eventId}/equipment")
-//  public List<EquipmentEntity> getEquipment(
-//      @PathVariable("projectId") UUID projectId, @PathVariable("eventId") UUID eventId) {
-//
-//  }
 
   // Get Clients for project
   @GetMapping(value = "{projectId}/clients")

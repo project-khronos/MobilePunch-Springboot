@@ -28,6 +28,7 @@ public class EquipmentEntity implements BaseEquipment {
   private static EntityLinks entityLinks;
 
   @Id
+  @NonNull
   @Column(name = "equipment_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
@@ -96,6 +97,14 @@ public class EquipmentEntity implements BaseEquipment {
     return events;
   }
 
+  public void setMfcyear(String mfcyear) {
+    this.mfcyear = mfcyear;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -112,9 +121,6 @@ public class EquipmentEntity implements BaseEquipment {
     this.model = model;
   }
 
-  public void setYear(String year) {
-    this.mfcyear = year;
-  }
 
   public void setDescription(String description) {
     this.description = description;
