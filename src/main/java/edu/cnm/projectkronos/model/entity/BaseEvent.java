@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface BaseEvent {
 
-  UUID getUuid();
+  UUID getEvent_id();
 
   Date getStartTime();
 

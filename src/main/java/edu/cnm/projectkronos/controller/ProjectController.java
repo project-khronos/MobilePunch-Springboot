@@ -31,14 +31,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProjectController {
 
   private ProjectRepository projectRepository;
-  private EventRepository eventRepository;
   private ClientRepository clientRepository;
 
   @Autowired
   public ProjectController(ProjectRepository projectRepository, EventRepository eventRepository,
       ClientRepository clientRepository) {
     this.projectRepository = projectRepository;
-    this.eventRepository = eventRepository;
     this.clientRepository = clientRepository;
   }
 
@@ -82,11 +80,9 @@ public class ProjectController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<EventEntity> postEvent(@PathVariable("projectId") UUID projectId,
       @RequestBody EventEntity event) {
-    eventRepository.save(event);
     ProjectEntity projectEntity = getProject(projectId);
-    projectEntity.getEvents().add(event);
     event.setProject(projectEntity);
-
+    projectRepository.save(projectEntity);
     return ResponseEntity.created(event.getHref()).body(event);
   }
 

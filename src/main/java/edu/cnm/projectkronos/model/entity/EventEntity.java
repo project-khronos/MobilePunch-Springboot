@@ -44,10 +44,8 @@ public class EventEntity implements BaseEvent {
   private double longitude;
 
 
-  @ManyToOne(fetch = FetchType.LAZY,
+  @ManyToOne(fetch = FetchType.EAGER,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//  @JoinTable(joinColumns = @JoinColumn(name = "event_id"),
-//      inverseJoinColumns = @JoinColumn(name = "project_id"))
   private ProjectEntity project;
 
   @ManyToMany(fetch = FetchType.LAZY,
@@ -68,7 +66,7 @@ public class EventEntity implements BaseEvent {
     return entityLinks;
   }
 
-  public UUID getUuid() {
+  public UUID getEvent_id() {
     return uuid;
   }
 
