@@ -1,4 +1,4 @@
-package edu.cnm.projectkronos.model.entity;
+package edu.cnm.projectkronos.view;
 
 import java.net.URI;
 import java.util.UUID;

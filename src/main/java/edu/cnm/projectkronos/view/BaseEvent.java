@@ -1,5 +1,6 @@
-package edu.cnm.projectkronos.model.entity;
+package edu.cnm.projectkronos.view;
 
+import edu.cnm.projectkronos.model.entity.ProjectEntity;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;

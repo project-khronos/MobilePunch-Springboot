@@ -2,6 +2,9 @@ package edu.cnm.projectkronos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.projectkronos.view.BaseClient;
+import edu.cnm.projectkronos.view.BaseEvent;
+import edu.cnm.projectkronos.view.BaseProject;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
@@ -12,8 +15,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;

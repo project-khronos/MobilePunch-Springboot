@@ -2,6 +2,8 @@ package edu.cnm.projectkronos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.projectkronos.view.BaseEquipment;
+import edu.cnm.projectkronos.view.BaseEvent;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
