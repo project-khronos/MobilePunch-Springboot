@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon Dec 03 09:45:14 MST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-74f5-a0f0-000003fe9018 
+Tue Dec 04 10:26:25 MST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-7a41-b429-000002f79358 
 on database directory /Users/travis/Desktop/Boot camp/Projects/MobilePunch-BackEnd3/projects_db with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/Users/travis/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
