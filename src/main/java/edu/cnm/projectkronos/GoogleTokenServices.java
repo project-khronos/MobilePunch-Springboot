@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collection;
 import java.util.Collections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,8 +33,10 @@ import org.springframework.stereotype.Component;
 public class GoogleTokenServices implements ResourceServerTokenServices {
 
   private final AccessTokenConverter converter = new DefaultAccessTokenConverter();
+
   @Value("${oauth.clientId}")
   private String clientId;
+  Logger log = LoggerFactory.getLogger(GoogleTokenServices.class);
 
   @Override
   public OAuth2Authentication loadAuthentication(String idTokenString)
@@ -44,6 +48,7 @@ public class GoogleTokenServices implements ResourceServerTokenServices {
           .setAudience(Collections.singletonList(clientId))
           .build();
       GoogleIdToken idToken = verifier.verify(idTokenString);
+      log.info(clientId);
       if (idToken != null) {
         Payload payload = idToken.getPayload();
         Collection<GrantedAuthority> grants = Collections

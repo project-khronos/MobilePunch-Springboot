@@ -11,7 +11,7 @@ public class ScheduledTasks {
 
   private static Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
-  @Scheduled(fixedRate = 10000)
+  @Scheduled(fixedRate = 1000000)
   public void isRunning() {
     log.info("Server is Running");
   }
