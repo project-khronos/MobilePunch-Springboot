@@ -3,6 +3,7 @@ package edu.cnm.projectkronos;
 import com.google.api.client.util.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableWebSecurity
 @EnableResourceServer
 @SpringBootApplication
+@EnableScheduling
 public class MobilePunchBackEndApplication extends ResourceServerConfigurerAdapter {
 
   @Value("${oauth.clientId}")
