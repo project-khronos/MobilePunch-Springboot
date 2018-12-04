@@ -7,13 +7,12 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.Value;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collection;
 import java.util.Collections;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,10 +32,8 @@ import org.springframework.stereotype.Component;
 public class GoogleTokenServices implements ResourceServerTokenServices {
 
   private final AccessTokenConverter converter = new DefaultAccessTokenConverter();
-
   @Value("${oauth.clientId}")
   private String clientId;
-  Logger log = LoggerFactory.getLogger(GoogleTokenServices.class);
 
   @Override
   public OAuth2Authentication loadAuthentication(String idTokenString)
@@ -48,7 +45,6 @@ public class GoogleTokenServices implements ResourceServerTokenServices {
           .setAudience(Collections.singletonList(clientId))
           .build();
       GoogleIdToken idToken = verifier.verify(idTokenString);
-      log.info(clientId);
       if (idToken != null) {
         Payload payload = idToken.getPayload();
         Collection<GrantedAuthority> grants = Collections
