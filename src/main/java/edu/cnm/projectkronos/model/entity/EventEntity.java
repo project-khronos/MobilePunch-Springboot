@@ -44,7 +44,7 @@ public class EventEntity implements BaseEvent {
   private double longitude;
 
 
-  @ManyToOne(fetch = FetchType.EAGER,
+  @ManyToOne(fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private ProjectEntity project;
 
