@@ -25,7 +25,7 @@ import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
-@ExposesResourceFor(EquipmentEntity.class)
+
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
