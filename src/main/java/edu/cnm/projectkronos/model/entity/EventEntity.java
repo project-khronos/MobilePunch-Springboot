@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseEquipment;
 import edu.cnm.projectkronos.view.BaseEvent;
+import edu.cnm.projectkronos.view.BaseProject;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
@@ -15,6 +16,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -32,6 +35,8 @@ public class EventEntity implements BaseEvent {
 
   @Id
   @NonNull
+  //FIXME REMOVE
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "event_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
@@ -98,7 +103,7 @@ public class EventEntity implements BaseEvent {
     return longitude;
   }
 
-
+  @JsonSerialize(contentAs = BaseProject.class)
   public ProjectEntity getProject() {
     return project;
   }

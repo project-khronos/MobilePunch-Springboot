@@ -106,6 +106,10 @@ public class ProjectController {
   public void deleteProject(@PathVariable("projectId") UUID projectId) {
     ProjectEntity project = getProject(projectId);
     List<ClientEntity> clients = project.getClients();
+    List<EventEntity> events = project.getEvents();
+    for (EventEntity event : events) {
+      eventRepository.delete(event);
+    }
     for (ClientEntity client : clients) {
       client.getProjects().remove(project);
     }

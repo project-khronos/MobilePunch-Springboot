@@ -1,22 +1,23 @@
 package edu.cnm.projectkronos;
 
-import com.google.api.client.util.Value;
+//import com.google.api.client.util.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.http.SessionCreationPolicy;
+//import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+//import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+//import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 
-@EnableResourceServer
+
 @SpringBootApplication
 @EnableScheduling
 public class MobilePunchBackEndApplication {
 
+  //@EnableResourceServer
   //@EnableWebSecurity
 
   // extends ResourceServerConfigurerAdapter

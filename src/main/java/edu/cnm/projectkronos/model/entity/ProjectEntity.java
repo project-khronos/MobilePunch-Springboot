@@ -10,11 +10,14 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Generated;
 import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -33,6 +36,8 @@ public class ProjectEntity implements BaseProject {
 
   @Id
   @NonNull
+  //FIXME REMOVE
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "project_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull

@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -31,6 +33,8 @@ public class EquipmentEntity implements BaseEquipment {
 
   @Id
   @NonNull
+  //FIXME REMOVE
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "equipment_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
