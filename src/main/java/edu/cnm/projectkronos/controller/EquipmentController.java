@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/equipment")
+@ExposesResourceFor(EquipmentEntity.class)
 public class EquipmentController {
 
   private EquipmentRepository equipmentRepository;

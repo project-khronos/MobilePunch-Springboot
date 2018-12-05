@@ -9,4 +9,5 @@ public interface EquipmentRepository extends CrudRepository<EquipmentEntity, UUI
 
   List<EquipmentEntity> findAllByOrderByNameAsc();
 
+
 }
