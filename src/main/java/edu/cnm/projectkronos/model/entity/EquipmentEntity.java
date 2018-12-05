@@ -21,9 +21,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+@ExposesResourceFor(EquipmentEntity.class)
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
