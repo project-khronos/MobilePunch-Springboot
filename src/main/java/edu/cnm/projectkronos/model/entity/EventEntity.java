@@ -16,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class EventEntity implements BaseEvent {
 
   @ManyToOne(fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @JoinColumn(name = "project_id")
   private ProjectEntity project;
 
   @ManyToMany(fetch = FetchType.LAZY,

@@ -49,7 +49,7 @@ public class ProjectEntity implements BaseProject {
   private List<ClientEntity> clients = new LinkedList<>();
 
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "uuid",
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "project",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<EventEntity> events = new LinkedList<>();
 
