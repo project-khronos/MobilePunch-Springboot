@@ -19,8 +19,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -48,9 +50,9 @@ public class EventEntity implements BaseEvent {
   private double latitude;
   private double longitude;
 
-
-  @ManyToOne(fetch = FetchType.LAZY,
+  @ManyToOne(fetch = FetchType.EAGER,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @JoinColumn(name = "project_id")
   private ProjectEntity project;
 
   @ManyToMany(fetch = FetchType.LAZY,

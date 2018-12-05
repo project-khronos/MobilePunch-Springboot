@@ -19,7 +19,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +55,7 @@ public class ProjectEntity implements BaseProject {
   @OrderBy("name ASC")
   private List<ClientEntity> clients = new LinkedList<>();
 
-
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "uuid",
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "project",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<EventEntity> events = new LinkedList<>();
 

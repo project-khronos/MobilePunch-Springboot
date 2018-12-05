@@ -82,8 +82,11 @@ public class ProjectController {
   public ResponseEntity<EventEntity> postEvent(@PathVariable("projectId") UUID projectId,
       @RequestBody EventEntity event) {
     ProjectEntity projectEntity = getProject(projectId);
+    //projectEntity.getEvents().add(event);
+    //projectRepository.save(projectEntity);
     event.setProject(projectEntity);
     eventRepository.save(event);
+
     return ResponseEntity.created(event.getHref()).body(event);
   }
 
