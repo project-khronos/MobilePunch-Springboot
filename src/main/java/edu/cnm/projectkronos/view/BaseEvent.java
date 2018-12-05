@@ -24,7 +24,7 @@ public interface BaseEvent {
 
   double getLongitude();
 
-  ProjectEntity getProject();
+//  ProjectEntity getProject();
 
   URI getHref();
 }

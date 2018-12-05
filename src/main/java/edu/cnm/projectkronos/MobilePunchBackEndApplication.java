@@ -11,27 +11,31 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
-@EnableWebSecurity
+
 @EnableResourceServer
 @SpringBootApplication
 @EnableScheduling
-public class MobilePunchBackEndApplication extends ResourceServerConfigurerAdapter {
+public class MobilePunchBackEndApplication {
 
-  @Value("${oauth.clientId}")
-  private String clientId;
+  //@EnableWebSecurity
+
+  // extends ResourceServerConfigurerAdapter
+
+//  @Value("${oauth.clientId}")
+//  private String clientId;
 
   public static void main(String[] args) {
     SpringApplication.run(MobilePunchBackEndApplication.class, args);
   }
 
-  @Override
-  public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-    resources.resourceId(clientId);
-  }
-
-  @Override
-  public void configure(HttpSecurity http) throws Exception {
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().anyRequest().hasRole("USER");
-  }
+//  @Override
+//  public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+//    resources.resourceId(clientId);
+//  }
+//
+//  @Override
+//  public void configure(HttpSecurity http) throws Exception {
+//    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//    http.authorizeRequests().anyRequest().hasRole("USER");
+//  }
 }
