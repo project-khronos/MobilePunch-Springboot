@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseEquipment;
 import edu.cnm.projectkronos.view.BaseEvent;
+import edu.cnm.projectkronos.view.BaseProject;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
@@ -21,6 +22,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -47,15 +49,16 @@ public class EventEntity implements BaseEvent {
   private double latitude;
   private double longitude;
 
-
+  @JsonSerialize(contentAs = BaseProject.class)
   @ManyToOne(fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   @JoinColumn(name = "project_id")
   private ProjectEntity project;
 
-  @ManyToMany(fetch = FetchType.LAZY,
+  @JsonSerialize(contentAs = BaseEquipment.class)
+  @ManyToOne(fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  private List<EquipmentEntity> equipment = new LinkedList<>();
+  private EquipmentEntity equipment;
 
   @PostConstruct
   private void initEntityLinks() {
@@ -103,7 +106,6 @@ public class EventEntity implements BaseEvent {
     return longitude;
   }
 
-
   public ProjectEntity getProject() {
     return project;
   }
@@ -113,8 +115,12 @@ public class EventEntity implements BaseEvent {
   }
 
   @JsonSerialize(contentAs = BaseEquipment.class)
-  public List<EquipmentEntity> getEquipment() {
+  public EquipmentEntity getEquipment() {
     return equipment;
+  }
+
+  public void setEquipment(EquipmentEntity equipment) {
+    this.equipment = equipment;
   }
 
   public void setUuid(UUID uuid) {

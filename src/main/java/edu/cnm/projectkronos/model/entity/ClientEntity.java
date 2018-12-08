@@ -49,6 +49,8 @@ public class ClientEntity implements BaseClient {
   private String altAddress;
   @Column(length = 4096, nullable = true)
   private String notes;
+
+  @JsonSerialize(contentAs = BaseProject.class)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "client",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 //  @JoinTable(joinColumns = @JoinColumn(name = "client_id"),

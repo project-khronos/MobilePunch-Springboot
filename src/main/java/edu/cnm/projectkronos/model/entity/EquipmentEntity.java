@@ -19,6 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -45,10 +47,11 @@ public class EquipmentEntity implements BaseEquipment {
   private String mfcyear;
   private String description;
 
-  @ManyToMany(fetch = FetchType.LAZY,
+  @JsonSerialize(contentAs = BaseEvent.class)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "equipment",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @JoinTable(joinColumns = @JoinColumn(name = "equipment_id"),
-      inverseJoinColumns = @JoinColumn(name = "event_id"))
+//  @JoinTable(joinColumns = @JoinColumn(name = "equipment_id"),
+//      inverseJoinColumns = @JoinColumn(name = "event_id"))
   private List<EventEntity> events = new LinkedList<>();
 
   @PostConstruct

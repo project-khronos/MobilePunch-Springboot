@@ -48,11 +48,12 @@ public class ProjectEntity implements BaseProject {
   private Date expectedEndTime;
   private String description;
 
+  @JsonSerialize(contentAs = BaseClient.class)
   @ManyToOne(fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private ClientEntity client;
 
-
+  @JsonSerialize(contentAs = BaseEvent.class)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "project",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<EventEntity> events = new LinkedList<>();
