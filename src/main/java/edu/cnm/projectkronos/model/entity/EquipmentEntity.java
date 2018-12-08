@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -31,12 +33,13 @@ public class EquipmentEntity implements BaseEquipment {
 
   @Id
   @NonNull
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "equipment_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
   private String name;
   @NonNull
-  private String Identification;
+  private String identification;
   private String make;
   private String model;
   private String mfcyear;
@@ -71,7 +74,7 @@ public class EquipmentEntity implements BaseEquipment {
   }
 
   public String getIdentification() {
-    return Identification;
+    return identification;
   }
 
   public String getMake() {
@@ -112,7 +115,7 @@ public class EquipmentEntity implements BaseEquipment {
   }
 
   public void setIdentification(String identification) {
-    Identification = identification;
+    this.identification = identification;
   }
 
   public void setMake(String make) {
