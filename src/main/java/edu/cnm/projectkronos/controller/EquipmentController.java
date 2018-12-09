@@ -31,6 +31,12 @@ public class EquipmentController {
   @Autowired
   public EquipmentController(EquipmentRepository equipmentRepository) {
     this.equipmentRepository = equipmentRepository;
+    EquipmentEntity noneEquipment = new EquipmentEntity();
+    noneEquipment.setName("None");
+    noneEquipment.setUuid(new UUID(0L,0L));
+    noneEquipment.setDescription("None");
+    noneEquipment.setIdentification("None");
+    this.equipmentRepository.save(noneEquipment);
   }
 
   //Get the list of equipment

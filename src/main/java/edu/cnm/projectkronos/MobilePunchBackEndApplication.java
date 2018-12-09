@@ -1,5 +1,6 @@
 package edu.cnm.projectkronos;
 
+import edu.cnm.projectkronos.model.dao.EquipmentRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,7 @@ public class MobilePunchBackEndApplication extends ResourceServerConfigurerAdapt
 
   public static void main(String[] args) {
     SpringApplication.run(MobilePunchBackEndApplication.class, args);
+
   }
 
   @Override
