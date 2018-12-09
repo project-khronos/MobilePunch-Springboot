@@ -70,7 +70,7 @@ public class ProjectController {
     ProjectEntity project = getProject(projectId);
     ClientEntity client = clientRepository.findById(partialClient.getUuid()).get();
     client.getProjects().add(project);
-    project.getClients().add(client);
+    project.setClient(client);
     clientRepository.save(client);
     projectRepository.save(project);
     return ResponseEntity.created(project.getHref()).body(project);
@@ -95,8 +95,8 @@ public class ProjectController {
 
   // Get Clients for project
   @GetMapping(value = "{projectId}/clients")
-  public List<ClientEntity> getClients(@PathVariable("projectId") UUID projectId) {
-    return getProject(projectId).getClients();
+  public ClientEntity getClients(@PathVariable("projectId") UUID projectId) {
+    return getProject(projectId).getClient();
   }
 
   //Delete a project
@@ -105,11 +105,9 @@ public class ProjectController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteProject(@PathVariable("projectId") UUID projectId) {
     ProjectEntity project = getProject(projectId);
-    List<ClientEntity> clients = project.getClients();
-    for (ClientEntity client : clients) {
-      client.getProjects().remove(project);
-    }
-    clientRepository.saveAll(clients);
+    ClientEntity client = project.getClient();
+    client.getProjects().remove(project);
+    clientRepository.save(client);
     projectRepository.delete(project);
   }
 

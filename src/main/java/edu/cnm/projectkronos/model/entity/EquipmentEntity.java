@@ -13,10 +13,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -31,21 +35,23 @@ public class EquipmentEntity implements BaseEquipment {
 
   @Id
   @NonNull
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "equipment_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
   private String name;
   @NonNull
-  private String Identification;
+  private String identification;
   private String make;
   private String model;
   private String mfcyear;
   private String description;
 
-  @ManyToMany(fetch = FetchType.LAZY,
+  @JsonSerialize(contentAs = BaseEvent.class)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "equipment",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @JoinTable(joinColumns = @JoinColumn(name = "equipment_id"),
-      inverseJoinColumns = @JoinColumn(name = "event_id"))
+//  @JoinTable(joinColumns = @JoinColumn(name = "equipment_id"),
+//      inverseJoinColumns = @JoinColumn(name = "event_id"))
   private List<EventEntity> events = new LinkedList<>();
 
   @PostConstruct
@@ -71,7 +77,7 @@ public class EquipmentEntity implements BaseEquipment {
   }
 
   public String getIdentification() {
-    return Identification;
+    return identification;
   }
 
   public String getMake() {
@@ -112,7 +118,7 @@ public class EquipmentEntity implements BaseEquipment {
   }
 
   public void setIdentification(String identification) {
-    Identification = identification;
+    this.identification = identification;
   }
 
   public void setMake(String make) {

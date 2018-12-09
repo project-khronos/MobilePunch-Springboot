@@ -1,6 +1,7 @@
 package edu.cnm.projectkronos.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseClient;
 import edu.cnm.projectkronos.view.BaseProject;
@@ -13,10 +14,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -31,6 +36,7 @@ public class ClientEntity implements BaseClient {
 
   @Id
   @NonNull
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "client_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
@@ -44,10 +50,11 @@ public class ClientEntity implements BaseClient {
   @Column(length = 4096, nullable = true)
   private String notes;
 
-  @ManyToMany(fetch = FetchType.LAZY,
+  @JsonSerialize(contentAs = BaseProject.class)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "client",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @JoinTable(joinColumns = @JoinColumn(name = "client_id"),
-      inverseJoinColumns = @JoinColumn(name = "project_id"))
+//  @JoinTable(joinColumns = @JoinColumn(name = "client_id"),
+//      inverseJoinColumns = @JoinColumn(name = "project_id"))
   private List<ProjectEntity> projects = new LinkedList<>();
 
   @PostConstruct

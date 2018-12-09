@@ -15,9 +15,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
@@ -33,6 +37,7 @@ public class ProjectEntity implements BaseProject {
 
   @Id
   @NonNull
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "project_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
@@ -43,12 +48,12 @@ public class ProjectEntity implements BaseProject {
   private Date expectedEndTime;
   private String description;
 
-  @ManyToMany(fetch = FetchType.LAZY,
+  @JsonSerialize(contentAs = BaseClient.class)
+  @ManyToOne(fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  @OrderBy("name ASC")
-  private List<ClientEntity> clients = new LinkedList<>();
+  private ClientEntity client;
 
-
+  @JsonSerialize(contentAs = BaseEvent.class)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "project",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private List<EventEntity> events = new LinkedList<>();
@@ -93,8 +98,8 @@ public class ProjectEntity implements BaseProject {
   }
 
   @JsonSerialize(contentAs = BaseClient.class)
-  public List<ClientEntity> getClients() {
-    return clients;
+  public ClientEntity getClient() {
+    return client;
   }
 
   @JsonSerialize(contentAs = BaseEvent.class)
@@ -126,8 +131,8 @@ public class ProjectEntity implements BaseProject {
     this.description = description;
   }
 
-  public void setClients(List<ClientEntity> clients) {
-    this.clients = clients;
+  public void setClient(ClientEntity client) {
+    this.client = client;
   }
 
   public URI getHref() {

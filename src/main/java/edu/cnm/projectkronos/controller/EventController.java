@@ -50,7 +50,7 @@ public class EventController {
 
   // Get list of Equipment for an event
   @GetMapping(value = "{eventId}/equipment", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<EquipmentEntity> equipment(@PathVariable("eventId") UUID eventId) {
+  public EquipmentEntity equipment(@PathVariable("eventId") UUID eventId) {
     return getEvent(eventId).getEquipment();
   }
 
@@ -61,7 +61,8 @@ public class EventController {
       @RequestBody EquipmentEntity partialEquipment) {
     EventEntity event = getEvent(eventId);
     EquipmentEntity equipment = equipmentRepository.findById(partialEquipment.getUuid()).get();
-    event.getEquipment().add(equipment);
+    event.setEquipment(equipment);
+    equipment.getEvents().add(event);
     eventRepository.save(event);
     return ResponseEntity.created(event.getHref()).body(event);
   }
