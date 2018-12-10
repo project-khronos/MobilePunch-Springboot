@@ -1,5 +1,5 @@
 {{#deprecated}}-deprecated-{{/deprecated}}
-<a id="{{operationId}}">{{summary}}</a>
+{{summary}}
 
 {{description}}
 
@@ -23,9 +23,16 @@
 {{#if consumes}}
 **Content-Type:** {{join consumes ", "}}{{/if}}
 
-##### Parameters
 {{#if parameters}}
+
+##### Parameters
+
 <table border="1">
+    <colgroup>
+      <col span="3" width="15%">
+      <col width="25%">
+      <col span="2" width="15%">
+    </colgroup>
     <tr>
         <th>Name</th>
         <th>Located in</th>
@@ -38,11 +45,11 @@
 
 {{#parameters}}
 <tr>
-    <th>{{name}}</th>
+    <td><strong>{{name}}</strong></td>
     <td>{{in}}</td>
     <td>{{#if required}}yes{{else}}no{{/if}}</td>
     <td>{{description}}{{#if pattern}} (**Pattern**: `{{pattern}}`){{/if}}</td>
-    <td> - </td>
+    <td>{{default}}</td>
 {{#ifeq in "body"}}
     <td>
     {{#ifeq schema.type "array"}}Array[<a href="{{schema.items.$ref}}">{{basename schema.items.$ref}}</a>]{{/ifeq}}
