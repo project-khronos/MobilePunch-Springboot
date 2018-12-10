@@ -46,6 +46,12 @@ public class EquipmentController {
   public List<EquipmentEntity> list() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());
+    EquipmentEntity noneEquipment = new EquipmentEntity();
+    noneEquipment.setName("None");
+    noneEquipment.setUuid(new UUID(0L, 0L));
+    noneEquipment.setDescription("None");
+    noneEquipment.setIdentification("None");
+    equipmentRepository.save(noneEquipment);
     return equipmentRepository.findAllByUserIdOrderByNameAsc(userId);
   }
 
