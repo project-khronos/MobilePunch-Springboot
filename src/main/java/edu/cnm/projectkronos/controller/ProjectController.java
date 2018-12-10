@@ -80,9 +80,9 @@ public class ProjectController {
     String userId = ((String) auth.getPrincipal());
     ProjectEntity project = getProject(projectId);
     ClientEntity client = clientRepository.findByUuidAndUserId(partialClient.getUuid(), userId);
-    client.getProjects().add(project);
+    // client.getProjects().add(project);
     project.setClient(client);
-    clientRepository.save(client);
+    // clientRepository.save(client);
     projectRepository.save(project);
     return ResponseEntity.created(project.getHref()).body(project);
   }

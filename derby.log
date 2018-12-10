@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Mon Dec 10 11:08:09 MST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-994e-11b1-00000a789698 
-on database directory /home/alex/Desktop/bootcamp/projects/MobilePunch-Springboot/projects_db with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/home/alex/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Mon Dec 10 13:06:22 MST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-99ba-497d-00000b81acc0 
+on database directory /Users/travis/Desktop/Boot camp/Projects/MobilePunch-BackEnd3/projects_db with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/Users/travis/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_181-b13
-user.dir=/home/alex/Desktop/bootcamp/projects/MobilePunch-Springboot
-os.name=Linux
-os.arch=amd64
-os.version=4.15.0-42-generic
+user.dir=/Users/travis/Desktop/Boot camp/Projects/MobilePunch-BackEnd3
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.14.1
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
