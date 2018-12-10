@@ -1,14 +1,11 @@
 package edu.cnm.projectkronos.controller;
 
-import edu.cnm.projectkronos.model.dao.ClientRepository;
 import edu.cnm.projectkronos.model.dao.EquipmentRepository;
 import edu.cnm.projectkronos.model.dao.EventRepository;
 import edu.cnm.projectkronos.model.dao.ProjectRepository;
-import edu.cnm.projectkronos.model.entity.ClientEntity;
 import edu.cnm.projectkronos.model.entity.EquipmentEntity;
 import edu.cnm.projectkronos.model.entity.EventEntity;
 import edu.cnm.projectkronos.model.entity.ProjectEntity;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 import javax.transaction.Transactional;
@@ -16,6 +13,8 @@ import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +44,9 @@ public class EventController {
   //Get event
   @GetMapping(value = "{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public EventEntity getEvent(@PathVariable("eventId") UUID eventId) {
-    return eventRepository.findById(eventId).get();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    return eventRepository.findByUserIdAndUuid(userId, eventId);
   }
 
   // Get list of Equipment for an event
@@ -59,10 +60,15 @@ public class EventController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<EventEntity> postEventEquipment(@PathVariable("eventId") UUID eventId,
       @RequestBody EquipmentEntity partialEquipment) {
+
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
     EventEntity event = getEvent(eventId);
-    EquipmentEntity equipment = equipmentRepository.findById(partialEquipment.getUuid()).get();
+    EquipmentEntity equipment = equipmentRepository
+        .findByUserIdAndUuid(userId, partialEquipment.getUuid());
     event.setEquipment(equipment);
     equipment.getEvents().add(event);
+    event.setUserId(userId);
     eventRepository.save(event);
     return ResponseEntity.created(event.getHref()).body(event);
   }
@@ -72,7 +78,10 @@ public class EventController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteEvent(@PathVariable("eventId") UUID eventId) {
     EventEntity event = getEvent(eventId);
-    ProjectEntity project = projectRepository.findById(event.getProject().getUuid()).get();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    ProjectEntity project = projectRepository
+        .findByUserIdAndUuid(userId, event.getProject().getUuid());
     project.getEvents().remove(event);
     projectRepository.save(project);
     eventRepository.delete(event);
