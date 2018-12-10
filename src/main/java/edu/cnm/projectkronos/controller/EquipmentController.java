@@ -52,13 +52,18 @@ public class EquipmentController {
   //Get equipment
   @GetMapping(value = "{equipmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public EquipmentEntity getEquipment(@PathVariable("equipmentId") UUID equipmentId) {
-    return equipmentRepository.findById(equipmentId).get();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    return equipmentRepository.findByUserIdAndUuid(userId, equipmentId);
   }
 
   //Post Equipment
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<EquipmentEntity> postEquipment(@RequestBody EquipmentEntity equipment) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    equipment.setUserId(userId);
     equipmentRepository.save(equipment);
     return ResponseEntity.created(equipment.getHref()).body(equipment);
   }
