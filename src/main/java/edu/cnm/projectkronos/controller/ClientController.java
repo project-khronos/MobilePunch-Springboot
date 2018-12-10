@@ -13,6 +13,8 @@ import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +43,8 @@ public class ClientController {
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ClientEntity> postClient(@RequestBody ClientEntity client) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    client.setUserId((String) auth.getPrincipal());
     clientRepository.save(client);
     return ResponseEntity.created(client.getHref()).body(client);
   }
@@ -48,13 +52,17 @@ public class ClientController {
   //Gets List of Clients
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<ClientEntity> list() {
-    return clientRepository.findAllByOrderByNameAsc();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    return clientRepository.findAllByUserIdOrderByNameAsc(userId);
   }
 
   // Get Client
   @GetMapping(value = "{clientId}")
   public ClientEntity getClient(@PathVariable("clientId") UUID clientId) {
-    return clientRepository.findById(clientId).get();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    return clientRepository.findByUuidAndUserId(clientId, userId);
   }
 
   //Get list of getProjects for a client

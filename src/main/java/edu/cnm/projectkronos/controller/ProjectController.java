@@ -15,6 +15,8 @@ import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +48,9 @@ public class ProjectController {
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ProjectEntity> postProject(@RequestBody ProjectEntity project) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    project.setUserId(userId);
     projectRepository.save(project);
     return ResponseEntity.created(project.getHref()).body(project);
   }
@@ -53,13 +58,17 @@ public class ProjectController {
   // Get Projects
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<ProjectEntity> list() {
-    return projectRepository.findAllByOrderByStartTime();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    return projectRepository.findAllByUserIdOrderByStartTime(userId);
   }
 
   // Get A Project
   @GetMapping(value = "{projectId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ProjectEntity getProject(@PathVariable("projectId") UUID projectId) {
-    return projectRepository.findById(projectId).get();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
+    return projectRepository.findByUserIdAndUuid(userId, projectId);
   }
 
   // Post a client to project
@@ -67,8 +76,10 @@ public class ProjectController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ProjectEntity> postClient(@PathVariable("projectId") UUID projectId,
       @RequestBody ClientEntity partialClient) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String userId = ((String) auth.getPrincipal());
     ProjectEntity project = getProject(projectId);
-    ClientEntity client = clientRepository.findById(partialClient.getUuid()).get();
+    ClientEntity client = clientRepository.findByUuidAndUserId(partialClient.getUuid(), userId);
     client.getProjects().add(project);
     project.setClient(client);
     clientRepository.save(client);

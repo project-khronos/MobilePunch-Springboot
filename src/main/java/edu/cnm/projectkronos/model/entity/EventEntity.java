@@ -1,5 +1,6 @@
 package edu.cnm.projectkronos.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseEquipment;
@@ -42,6 +43,18 @@ public class EventEntity implements BaseEvent {
   private String description;
   private double latitude;
   private double longitude;
+  @JsonIgnore
+  private String userId;
+
+  @JsonIgnore
+  public String getUserId() {
+    return userId;
+  }
+
+  @JsonIgnore
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
   @JsonSerialize(contentAs = BaseProject.class)
   @ManyToOne(fetch = FetchType.LAZY,

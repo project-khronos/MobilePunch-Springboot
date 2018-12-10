@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ClientRepository extends CrudRepository<ClientEntity, UUID> {
 
-  List<ClientEntity> findAllByOrderByNameAsc();
+  List<ClientEntity> findAllByUserIdOrderByNameAsc(String UserId);
 
+  ClientEntity findByUuidAndUserId(UUID uuid, String userId);
 }

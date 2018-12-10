@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface EquipmentRepository extends CrudRepository<EquipmentEntity, UUID> {
 
-  List<EquipmentEntity> findAllByOrderByNameAsc();
+  List<EquipmentEntity> findAllByUserIdOrderByNameAsc(String userId);
 
 
 }

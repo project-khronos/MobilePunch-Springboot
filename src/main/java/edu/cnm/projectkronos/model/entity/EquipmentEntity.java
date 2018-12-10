@@ -1,5 +1,6 @@
 package edu.cnm.projectkronos.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseEquipment;
@@ -13,13 +14,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
@@ -46,6 +41,18 @@ public class EquipmentEntity implements BaseEquipment {
   private String model;
   private String mfcyear;
   private String description;
+  @JsonIgnore
+  private String userId;
+
+  @JsonIgnore
+  public String getUserId() {
+    return userId;
+  }
+
+  @JsonIgnore
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
   @JsonSerialize(contentAs = BaseEvent.class)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "equipment",

@@ -7,7 +7,6 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collection;
@@ -52,7 +51,6 @@ public class GoogleTokenServices implements ResourceServerTokenServices {
         Authentication base = new UsernamePasswordAuthenticationToken(payload.getSubject(),
             idTokenString, grants);
         OAuth2Request request = converter.extractAuthentication(payload).getOAuth2Request();
-
         return new OAuth2Authentication(request, base);
       } else {
         throw new BadCredentialsException(idTokenString);

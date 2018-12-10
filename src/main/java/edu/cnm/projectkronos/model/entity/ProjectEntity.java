@@ -1,5 +1,6 @@
 package edu.cnm.projectkronos.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseClient;
@@ -42,6 +43,19 @@ public class ProjectEntity implements BaseProject {
   private Date endTime;
   private Date expectedEndTime;
   private String description;
+
+  @JsonIgnore
+  private String userId;
+
+  @JsonIgnore
+  public String getUserId() {
+    return userId;
+  }
+
+  @JsonIgnore
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
   @JsonSerialize(contentAs = BaseClient.class)
   @ManyToOne(fetch = FetchType.LAZY,
