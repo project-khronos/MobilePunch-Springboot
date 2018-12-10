@@ -44,6 +44,7 @@ public class EventEntity implements BaseEvent {
   private double latitude;
   private double longitude;
   @JsonIgnore
+  @Id
   private String userId;
 
   @JsonIgnore
