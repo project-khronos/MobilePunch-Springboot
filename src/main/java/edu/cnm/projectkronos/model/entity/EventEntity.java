@@ -8,21 +8,15 @@ import edu.cnm.projectkronos.view.BaseProject;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
@@ -37,7 +31,7 @@ public class EventEntity implements BaseEvent {
 
   @Id
   @NonNull
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  //@GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "event_id", columnDefinition = "CHAR(16) FOR BIT DATA", nullable = false, updatable = false)
   private UUID uuid;
   @NonNull
