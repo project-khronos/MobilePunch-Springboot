@@ -9,5 +9,6 @@ public interface EquipmentRepository extends CrudRepository<EquipmentEntity, UUI
 
   List<EquipmentEntity> findAllByUserIdOrderByNameAsc(String userId);
 
+  EquipmentEntity findByUserIdAndUuid(String userId, UUID uuid);
 
 }
