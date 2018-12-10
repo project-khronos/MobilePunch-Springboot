@@ -15,8 +15,6 @@ public interface BaseEquipment {
 
   String getModel();
 
-  String getYear();
-
   String getDescription();
 
   String getMfcyear();

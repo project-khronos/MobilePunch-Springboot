@@ -69,9 +69,7 @@ public class ProjectController {
       @RequestBody ClientEntity partialClient) {
     ProjectEntity project = getProject(projectId);
     ClientEntity client = clientRepository.findById(partialClient.getUuid()).get();
-    client.getProjects().add(project);
     project.setClient(client);
-    clientRepository.save(client);
     projectRepository.save(project);
     return ResponseEntity.created(project.getHref()).body(project);
   }

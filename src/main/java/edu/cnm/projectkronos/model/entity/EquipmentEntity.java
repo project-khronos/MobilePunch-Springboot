@@ -88,10 +88,6 @@ public class EquipmentEntity implements BaseEquipment {
     return model;
   }
 
-  public String getYear() {
-    return mfcyear;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -105,7 +101,7 @@ public class EquipmentEntity implements BaseEquipment {
     return events;
   }
 
-  public void setMfcyear(String mfcyear) {
+  public void setMfcYear(String mfcyear) {
     this.mfcyear = mfcyear;
   }
 
@@ -128,7 +124,6 @@ public class EquipmentEntity implements BaseEquipment {
   public void setModel(String model) {
     this.model = model;
   }
-
 
   public void setDescription(String description) {
     this.description = description;
