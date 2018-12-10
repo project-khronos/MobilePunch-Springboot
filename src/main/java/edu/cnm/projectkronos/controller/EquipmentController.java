@@ -51,6 +51,7 @@ public class EquipmentController {
     noneEquipment.setUuid(new UUID(0L, 0L));
     noneEquipment.setDescription("None");
     noneEquipment.setIdentification("None");
+    noneEquipment.setUserId(userId);
     equipmentRepository.save(noneEquipment);
     return equipmentRepository.findAllByUserIdOrderByNameAsc(userId);
   }
