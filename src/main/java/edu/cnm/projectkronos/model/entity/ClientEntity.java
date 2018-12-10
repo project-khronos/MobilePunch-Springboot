@@ -61,8 +61,6 @@ public class ClientEntity implements BaseClient {
   @JsonSerialize(contentAs = BaseProject.class)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "client",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//  @JoinTable(joinColumns = @JoinColumn(name = "client_id"),
-//      inverseJoinColumns = @JoinColumn(name = "project_id"))
   private List<ProjectEntity> projects = new LinkedList<>();
 
   @PostConstruct

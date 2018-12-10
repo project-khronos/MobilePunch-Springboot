@@ -6,6 +6,9 @@ import edu.cnm.projectkronos.model.dao.ProjectRepository;
 import edu.cnm.projectkronos.model.entity.ClientEntity;
 import edu.cnm.projectkronos.model.entity.EventEntity;
 import edu.cnm.projectkronos.model.entity.ProjectEntity;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -45,9 +48,11 @@ public class ProjectController {
   }
 
   // Post Project
+  @ApiOperation(value = "Post a Project", notes = "Posts a Project entity to the api taking into account the user to whom the Project record belongs to")
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<ProjectEntity> postProject(@RequestBody ProjectEntity project) {
+  public ResponseEntity<ProjectEntity> postProject(
+      @ApiParam(value = "Partial Project Definition", required = true) @RequestBody ProjectEntity project) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());
     project.setUserId(userId);
@@ -56,6 +61,7 @@ public class ProjectController {
   }
 
   // Get Projects
+  @ApiOperation(value = "Get Projects", notes = "Returns a list of Projects associated to the user.")
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<ProjectEntity> list() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -64,18 +70,22 @@ public class ProjectController {
   }
 
   // Get A Project
+  @ApiOperation(value = "Get a Project", notes = "Returns a single Project. ")
   @GetMapping(value = "{projectId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ProjectEntity getProject(@PathVariable("projectId") UUID projectId) {
+  public ProjectEntity getProject(
+      @ApiParam(value = "Project Id", required = true) @PathVariable("projectId") UUID projectId) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());
     return projectRepository.findByUserIdAndUuid(userId, projectId);
   }
 
   // Post a client to project
+  @ApiOperation(value = "Post a Client to a Project", notes = "Associates a single Client to a single Project.")
   @PostMapping(value = "{projectId}/clients", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<ProjectEntity> postClient(@PathVariable("projectId") UUID projectId,
-      @RequestBody ClientEntity partialClient) {
+  public ResponseEntity<ProjectEntity> postClient(
+      @ApiParam(value = "Project Id", required = true) @PathVariable("projectId") UUID projectId,
+      @ApiParam(value = "Client Id", required = true) @RequestBody ClientEntity partialClient) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());
     ProjectEntity project = getProject(projectId);
@@ -88,10 +98,12 @@ public class ProjectController {
   }
 
   // Post event to a project
+  @ApiParam(value = "Post an Event to a Project", name = "Associates a new Event with a single Project.")
   @PostMapping(value = "{projectId}/events", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EventEntity> postEvent(@PathVariable("projectId") UUID projectId,
-      @RequestBody EventEntity event) {
+  public ResponseEntity<EventEntity> postEvent(
+      @ApiParam(value = "Project Id", required = true) @PathVariable(value = "projectId") UUID projectId,
+      @ApiParam(value = "Partial Event definition", required = true) @RequestBody EventEntity event) {
     ProjectEntity projectEntity = getProject(projectId);
     event.setProject(projectEntity);
     eventRepository.save(event);
@@ -99,22 +111,28 @@ public class ProjectController {
   }
 
   // Get Events for a Project
+  @ApiOperation(value = "Get Project Events", notes = "Returns the list of Events associated with a single Project.")
   @GetMapping(value = "{projectId}/events", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<EventEntity> getEvents(@PathVariable("projectId") UUID projectId) {
+  public List<EventEntity> getEvents(
+      @ApiParam(value = "Project Id", required = true) @PathVariable("projectId") UUID projectId) {
     return getProject(projectId).getEvents();
   }
 
-  // Get Clients for project
+  // Get Client for project
+  @ApiOperation(value = "Get Project Client", notes = "Returns the Client associated with the Project.")
   @GetMapping(value = "{projectId}/clients")
-  public ClientEntity getClients(@PathVariable("projectId") UUID projectId) {
+  public ClientEntity getClients(
+      @ApiParam(value = "Project Id", required = true) @PathVariable("projectId") UUID projectId) {
     return getProject(projectId).getClient();
   }
 
   //Delete a project
+  @ApiOperation(value = "Delete Project", notes = "Delete a Project and its Events.")
   @Transactional
   @DeleteMapping(value = "{projectId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteProject(@PathVariable("projectId") UUID projectId) {
+  public void deleteProject(
+      @ApiParam(value = "Project Id", required = true) @PathVariable("projectId") UUID projectId) {
     ProjectEntity project = getProject(projectId);
     ClientEntity client = project.getClient();
     client.getProjects().remove(project);
