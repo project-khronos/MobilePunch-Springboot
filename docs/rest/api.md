@@ -171,7 +171,7 @@ This Api is used as a backend database for a ProjectKhronos client
       
         <tr><td>&nbsp;</td><td><code>GET</code></td><td><a href="#getEvents">Get Project Events</a></td></tr>
         
-        <tr><td>&nbsp;</td><td><code>POST</code></td><td><a href="#postEvent"></a></td></tr>
+        <tr><td>&nbsp;</td><td><code>POST</code></td><td><a href="#postEvent">Post an Event to a Project</a></td></tr>
         
         
         
@@ -1619,9 +1619,9 @@ Returns the list of Events associated with a single Project.
 
 ### <a name="postEvent"></a>POST
 
+Post an Event to a Project
 
-
-
+Associates a new Event with a single Project.
 
 
 

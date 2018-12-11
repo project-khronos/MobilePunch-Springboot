@@ -376,6 +376,8 @@ paths:
             items:
               $ref: "#/definitions/EventEntity"
     post:
+      summary: "Post an Event to a Project"
+      description: "Associates a new Event with a single Project."
       operationId: "postEvent"
       consumes:
         - "application/json"

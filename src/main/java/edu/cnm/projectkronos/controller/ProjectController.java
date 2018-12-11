@@ -98,7 +98,7 @@ public class ProjectController {
   }
 
   // Post event to a project
-  @ApiParam(value = "Post an Event to a Project", name = "Associates a new Event with a single Project.")
+  @ApiOperation(value = "Post an Event to a Project", notes = "Associates a new Event with a single Project.")
   @PostMapping(value = "{projectId}/events", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<EventEntity> postEvent(
