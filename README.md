@@ -55,15 +55,47 @@ We have run the server on a virtualized host from A2 hosting.  The host was runn
 
 ## External Services
 
+Google OAuth2
 
+## Stretch Goals
 
+Allow users to save images with events. 
 
+## Aesthic improvements
 
+Not Applicable.
 
+## Wireframes and User Stories
 
+Not Applicable.
 
+## ERD 
 
+[ERD](DetailedERD.pdf)
 
+## DDL
 
+## Javadoc
+
+[Javadoc](/docs/api/index.html)
+
+## Rest Documentation
 
 [Rest Api Documentation](docs/rest/api.md)
+
+## Licenses
+
+
+
+## Instructions for Building
+
+
+
+
+## Instructions for Using This Component
+After building the jar file,
+
+
+
+
+
