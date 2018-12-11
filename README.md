@@ -71,9 +71,13 @@ Not Applicable.
 
 ## ERD 
 
+[ERD](DetailedERD.pdf)
+
 ## DDL
 
 ## Javadoc
+
+[Javadoc](/docs/api/index.html)
 
 ## Rest Documentation
 
