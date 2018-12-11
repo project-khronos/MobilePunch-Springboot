@@ -45,8 +45,7 @@ We have run the server on a virtualized host from A2 hosting.  The host was runn
 
 ## Third Party Libraries
 
-* Spring
-* SpringBoot
+* Spring-Boot
 * Hibernate
 * Jackson
 * Derby
@@ -159,6 +158,12 @@ ALTER TABLE project_entity
 
 ## Licenses
 
+[Spring-boot](https://github.com/spring-projects/spring-boot/blob/master/LICENSE.txt)
+[Hibernate](http://hibernate.org/community/license/)
+* Jackson
+* Derby
+* Swagger
+* Swagger Maven Plugin by kongchen
 
 
 ## Instructions for Building
