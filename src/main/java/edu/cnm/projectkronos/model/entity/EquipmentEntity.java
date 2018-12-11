@@ -42,7 +42,6 @@ public class EquipmentEntity implements BaseEquipment {
   private String mfcyear;
   private String description;
   @JsonIgnore
-  @Id
   private String userId;
 
   @JsonIgnore
