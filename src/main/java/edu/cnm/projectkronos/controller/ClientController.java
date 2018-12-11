@@ -42,7 +42,7 @@ public class ClientController {
   }
 
   // Post a client
-  @ApiOperation(value = "Post a Client", notes = "Posts a Client entity to the api taking into account the user to whom the client record belongs to")
+  @ApiOperation(value = "Post a Client", notes = "Posts a Client entity to the api taking into account the user to whom the client record belongs to.")
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ClientEntity> postClient(

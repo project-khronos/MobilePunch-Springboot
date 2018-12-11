@@ -1,0 +1,527 @@
+---
+swagger: "2.0"
+info:
+  description: "This Api is used as a backend database for a ProjectKhronos client\n\
+    \                  application."
+  version: "v1"
+  title: "Swagger documentation for ProjectKhronos API"
+host: "straylense.space"
+basePath: "/projectkhronos"
+schemes:
+  - "https"
+paths:
+  /clients:
+    get:
+      summary: "Get the List of Clients"
+      description: "Returns the list Clients associated with the user."
+      operationId: "list"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ClientEntity"
+    post:
+      summary: "Post a Client"
+      description: "Posts a Client entity to the api taking into account the user\
+        \ to whom the client record belongs to."
+      operationId: "postClient"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Partial Client definition"
+          required: true
+          schema:
+            $ref: "#/definitions/ClientEntity"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ClientEntity"
+  /clients/{clientId}:
+    get:
+      summary: "Get a Client."
+      description: "Returns a single Client."
+      operationId: "getClient"
+      parameters:
+        - name: "clientId"
+          in: "path"
+          description: "Client Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ClientEntity"
+    delete:
+      summary: "Delete a client"
+      description: "Delete a specified Client."
+      operationId: "deleteClient"
+      parameters:
+        - name: "clientId"
+          in: "path"
+          description: "Client Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        204:
+          description: ""
+  /clients/{clientId}/projects:
+    get:
+      summary: "List of Projects"
+      description: "Returns a list of Projects associated with a the specified Client."
+      operationId: "getProjects"
+      parameters:
+        - name: "clientId"
+          in: "path"
+          description: "Client Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ProjectEntity"
+  /equipment:
+    get:
+      summary: "Get equipment list"
+      description: "Returns thew list of all equipment associated with the user."
+      operationId: "list"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EquipmentEntity"
+    post:
+      summary: "Post Equipment"
+      description: "Post an Equipment entity to the API."
+      operationId: "postEquipment"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Partial equipment definition"
+          required: true
+          schema:
+            $ref: "#/definitions/EquipmentEntity"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/EquipmentEntity"
+  /equipment/{equipmentId}:
+    get:
+      summary: "Get Equipment"
+      description: "Returns a single equipment entity"
+      operationId: "getEquipment"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "equipmentId"
+          in: "path"
+          description: "Equipment Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/EquipmentEntity"
+    delete:
+      summary: "Delete equipoment"
+      description: "Deletes a single Equipment entity."
+      operationId: "deleteEquipment"
+      parameters:
+        - name: "equipmentId"
+          in: "path"
+          description: "Equipment ID"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        204:
+          description: ""
+  /events/{eventId}:
+    get:
+      summary: "Get an Event"
+      description: "Returns a single Event"
+      operationId: "getEvent"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          description: "Event Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/EventEntity"
+    delete:
+      summary: "Delete an Event"
+      description: "Deletes an Event without deleting the project associated with\
+        \ the Event."
+      operationId: "deleteEvent"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          description: "Event Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        204:
+          description: ""
+  /events/{eventId}/equipment:
+    get:
+      summary: "Get Event Equipment"
+      description: "Returns the Equipment associated with a single event."
+      operationId: "equipment"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          description: "Event Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/EquipmentEntity"
+    post:
+      summary: "Post Event Equipment"
+      description: "Associates an Equipment entity with a single Event."
+      operationId: "postEventEquipment"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          description: "Event Id"
+          required: true
+          type: "string"
+          format: "uuid"
+        - in: "body"
+          name: "body"
+          required: false
+          schema:
+            $ref: "#/definitions/EquipmentEntity"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/EventEntity"
+  /projects:
+    get:
+      summary: "Get Projects"
+      description: "Returns a list of Projects associated to the user."
+      operationId: "list"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ProjectEntity"
+    post:
+      summary: "Post a Project"
+      description: "Posts a Project entity to the api taking into account the user\
+        \ to whom the Project record belongs to"
+      operationId: "postProject"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Partial Project Definition"
+          required: true
+          schema:
+            $ref: "#/definitions/ProjectEntity"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ProjectEntity"
+  /projects/{projectId}:
+    get:
+      summary: "Get a Project"
+      description: "Returns a single Project. "
+      operationId: "getProject"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          description: "Project Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ProjectEntity"
+    delete:
+      summary: "Delete Project"
+      description: "Delete a Project and its Events."
+      operationId: "deleteProject"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          description: "Project Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        204:
+          description: ""
+  /projects/{projectId}/clients:
+    get:
+      summary: "Get Project Client"
+      description: "Returns the Client associated with the Project."
+      operationId: "getClients"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          description: "Project Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ClientEntity"
+    post:
+      summary: "Post a Client to a Project"
+      description: "Associates a single Client to a single Project."
+      operationId: "postClient"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          description: "Project Id"
+          required: true
+          type: "string"
+          format: "uuid"
+        - in: "body"
+          name: "body"
+          description: "Client Id"
+          required: true
+          schema:
+            $ref: "#/definitions/ClientEntity"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ProjectEntity"
+  /projects/{projectId}/events:
+    get:
+      summary: "Get Project Events"
+      description: "Returns the list of Events associated with a single Project."
+      operationId: "getEvents"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          description: "Project Id"
+          required: true
+          type: "string"
+          format: "uuid"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EventEntity"
+    post:
+      operationId: "postEvent"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          description: "Project Id"
+          required: true
+          type: "string"
+          format: "uuid"
+        - in: "body"
+          name: "body"
+          description: "Partial Event definition"
+          required: true
+          schema:
+            $ref: "#/definitions/EventEntity"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/EventEntity"
+definitions:
+  ClientEntity:
+    type: "object"
+    required:
+      - "uuid"
+    properties:
+      uuid:
+        type: "string"
+        format: "uuid"
+        description: "Client Id"
+      name:
+        type: "string"
+      phone:
+        type: "string"
+      altPhone:
+        type: "string"
+      email:
+        type: "string"
+      address:
+        type: "string"
+      altAddress:
+        type: "string"
+      notes:
+        type: "string"
+      projects:
+        type: "array"
+        items:
+          $ref: "#/definitions/ProjectEntity"
+      href:
+        type: "string"
+        format: "uri"
+  EquipmentEntity:
+    type: "object"
+    required:
+      - "uuid"
+    properties:
+      uuid:
+        type: "string"
+        format: "uuid"
+        description: "Equipment Id"
+      name:
+        type: "string"
+      identification:
+        type: "string"
+      make:
+        type: "string"
+      model:
+        type: "string"
+      mfcyear:
+        type: "string"
+      description:
+        type: "string"
+      events:
+        type: "array"
+        items:
+          $ref: "#/definitions/EventEntity"
+      href:
+        type: "string"
+        format: "uri"
+      year:
+        type: "string"
+  EventEntity:
+    type: "object"
+    required:
+      - "event_id"
+    properties:
+      startTime:
+        type: "string"
+        format: "date-time"
+      endTime:
+        type: "string"
+        format: "date-time"
+      expenses:
+        type: "number"
+      income:
+        type: "number"
+      description:
+        type: "string"
+      latitude:
+        type: "number"
+        format: "double"
+      longitude:
+        type: "number"
+        format: "double"
+      project:
+        $ref: "#/definitions/ProjectEntity"
+      equipment:
+        $ref: "#/definitions/EquipmentEntity"
+      href:
+        type: "string"
+        format: "uri"
+      event_id:
+        type: "string"
+        format: "uuid"
+        description: "Event ID"
+  ProjectEntity:
+    type: "object"
+    required:
+      - "uuid"
+    properties:
+      uuid:
+        type: "string"
+        format: "uuid"
+        description: "Project Id"
+      name:
+        type: "string"
+      startTime:
+        type: "string"
+        format: "date-time"
+      endTime:
+        type: "string"
+        format: "date-time"
+      expectedEndTime:
+        type: "string"
+        format: "date-time"
+      description:
+        type: "string"
+      client:
+        $ref: "#/definitions/ClientEntity"
+      events:
+        type: "array"
+        items:
+          $ref: "#/definitions/EventEntity"
+      href:
+        type: "string"
+        format: "uri"

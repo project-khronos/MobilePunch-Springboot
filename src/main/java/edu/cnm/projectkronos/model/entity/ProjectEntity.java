@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseClient;
 import edu.cnm.projectkronos.view.BaseEvent;
 import edu.cnm.projectkronos.view.BaseProject;
+import io.swagger.annotations.ApiModelProperty;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
@@ -82,6 +83,7 @@ public class ProjectEntity implements BaseProject {
     return entityLinks;
   }
 
+  @ApiModelProperty(value = "Project Id", required = true)
   public UUID getUuid() {
     return uuid;
   }

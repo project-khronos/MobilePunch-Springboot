@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseEquipment;
 import edu.cnm.projectkronos.view.BaseEvent;
 import edu.cnm.projectkronos.view.BaseProject;
+import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
@@ -82,6 +83,7 @@ public class EventEntity implements BaseEvent {
     return entityLinks;
   }
 
+  @ApiModelProperty(value = "Event ID", required = true)
   public UUID getEvent_id() {
     return uuid;
   }

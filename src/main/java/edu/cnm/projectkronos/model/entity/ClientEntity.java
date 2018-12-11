@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.projectkronos.view.BaseClient;
 import edu.cnm.projectkronos.view.BaseProject;
+import io.swagger.annotations.ApiModelProperty;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
@@ -76,6 +77,7 @@ public class ClientEntity implements BaseClient {
     return entityLinks;
   }
 
+  @ApiModelProperty(value = "Client Id", required = true)
   public UUID getUuid() {
     return uuid;
   }
