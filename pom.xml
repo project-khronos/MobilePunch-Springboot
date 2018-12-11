@@ -89,7 +89,10 @@
             <apiSource>
               <springmvc>true</springmvc>
               <locations>
-                <location>package edu.cnm.projectkronos</location>
+                <location>edu.cnm.projectkronos.controller.ProjectController</location>
+                <location>edu.cnm.projectkronos.controller.ClientController</location>
+                <location>edu.cnm.projectkronos.controller.EquipmentController</location>
+                <location>edu.cnm.projectkronos.controller.EventController</location>
               </locations>
               <schemes>
                 <scheme>https</scheme>
