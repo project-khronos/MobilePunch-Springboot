@@ -55,8 +55,19 @@ We have run the server on a virtualized host from A2 hosting.  The host was runn
 
 ## External Services
 
+Google OAuth2
 
+## Stretch Goals
 
+Allow users to save images with events. 
+
+## Aesthic improvements
+
+Not Applicable.
+
+## Wireframes
+
+Not Applicable.
 
 
 
