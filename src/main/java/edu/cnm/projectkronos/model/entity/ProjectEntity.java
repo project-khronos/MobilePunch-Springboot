@@ -25,6 +25,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Project entity.
+ */
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -48,11 +51,21 @@ public class ProjectEntity implements BaseProject {
   @JsonIgnore
   private String userId;
 
+  /**
+   * Gets user id.
+   *
+   * @return the user id
+   */
   @JsonIgnore
   public String getUserId() {
     return userId;
   }
 
+  /**
+   * Sets user id.
+   *
+   * @param userId the user id
+   */
   @JsonIgnore
   public void setUserId(String userId) {
     this.userId = userId;
@@ -79,6 +92,11 @@ public class ProjectEntity implements BaseProject {
     ProjectEntity.entityLinks = entityLinks;
   }
 
+  /**
+   * Gets entity links.
+   *
+   * @return the entity links
+   */
   public static EntityLinks getEntityLinks() {
     return entityLinks;
   }
@@ -108,40 +126,85 @@ public class ProjectEntity implements BaseProject {
     return description;
   }
 
+  /**
+   * Gets client.
+   *
+   * @return the client
+   */
   @JsonSerialize(contentAs = BaseClient.class)
   public ClientEntity getClient() {
     return client;
   }
 
+  /**
+   * Gets events.
+   *
+   * @return the events
+   */
   @JsonSerialize(contentAs = BaseEvent.class)
   public List<EventEntity> getEvents() {
     return events;
   }
 
+  /**
+   * Sets uuid.
+   *
+   * @param uuid the uuid
+   */
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
   }
 
+  /**
+   * Sets name.
+   *
+   * @param name the name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Sets start time.
+   *
+   * @param startTime the start time
+   */
   public void setStartTime(Date startTime) {
     this.startTime = startTime;
   }
 
+  /**
+   * Sets end time.
+   *
+   * @param endTime the end time
+   */
   public void setEndTime(Date endTime) {
     this.endTime = endTime;
   }
 
+  /**
+   * Sets expected end time.
+   *
+   * @param expectedEndTime the expected end time
+   */
   public void setExpectedEndTime(Date expectedEndTime) {
     this.expectedEndTime = expectedEndTime;
   }
 
+  /**
+   * Sets description.
+   *
+   * @param description the description
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * Sets client.
+   *
+   * @param client the client
+   */
   public void setClient(ClientEntity client) {
     this.client = client;
   }

@@ -1,6 +1,5 @@
 package edu.cnm.projectkronos;
 
-import edu.cnm.projectkronos.model.dao.EquipmentRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +11,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+/**
+ * The type Mobile punch back end application.
+ */
 @EnableWebSecurity
 @EnableResourceServer
 @SpringBootApplication
@@ -21,6 +23,11 @@ public class MobilePunchBackEndApplication extends ResourceServerConfigurerAdapt
   @Value("${oauth.clientId}")
   private String clientId;
 
+  /**
+   * The entry point of application.
+   *
+   * @param args the input arguments
+   */
   public static void main(String[] args) {
     SpringApplication.run(MobilePunchBackEndApplication.class, args);
 

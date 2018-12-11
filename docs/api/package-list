@@ -1,0 +1,5 @@
+edu.cnm.projectkronos
+edu.cnm.projectkronos.controller
+edu.cnm.projectkronos.model.dao
+edu.cnm.projectkronos.model.entity
+edu.cnm.projectkronos.view

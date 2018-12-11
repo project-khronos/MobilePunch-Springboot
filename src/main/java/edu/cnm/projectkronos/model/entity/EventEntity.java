@@ -25,6 +25,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Event entity.
+ */
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -48,11 +51,21 @@ public class EventEntity implements BaseEvent {
   @JsonIgnore
   private String userId;
 
+  /**
+   * Gets user id.
+   *
+   * @return the user id
+   */
   @JsonIgnore
   public String getUserId() {
     return userId;
   }
 
+  /**
+   * Sets user id.
+   *
+   * @param userId the user id
+   */
   @JsonIgnore
   public void setUserId(String userId) {
     this.userId = userId;
@@ -79,6 +92,11 @@ public class EventEntity implements BaseEvent {
     EventEntity.entityLinks = entityLinks;
   }
 
+  /**
+   * Gets entity links.
+   *
+   * @return the entity links
+   */
   public static EntityLinks getEntityLinks() {
     return entityLinks;
   }
@@ -116,51 +134,111 @@ public class EventEntity implements BaseEvent {
     return longitude;
   }
 
+  /**
+   * Gets project.
+   *
+   * @return the project
+   */
   public ProjectEntity getProject() {
     return project;
   }
 
+  /**
+   * Sets project.
+   *
+   * @param project the project
+   */
   public void setProject(ProjectEntity project) {
     this.project = project;
   }
 
+  /**
+   * Gets equipment.
+   *
+   * @return the equipment
+   */
   @JsonSerialize(contentAs = BaseEquipment.class)
   public EquipmentEntity getEquipment() {
     return equipment;
   }
 
+  /**
+   * Sets equipment.
+   *
+   * @param equipment the equipment
+   */
   public void setEquipment(EquipmentEntity equipment) {
     this.equipment = equipment;
   }
 
+  /**
+   * Sets uuid.
+   *
+   * @param uuid the uuid
+   */
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
   }
 
+  /**
+   * Sets start time.
+   *
+   * @param startTime the start time
+   */
   public void setStartTime(Date startTime) {
     this.startTime = startTime;
   }
 
+  /**
+   * Sets end time.
+   *
+   * @param endTime the end time
+   */
   public void setEndTime(Date endTime) {
     this.endTime = endTime;
   }
 
+  /**
+   * Sets expenses.
+   *
+   * @param expenses the expenses
+   */
   public void setExpenses(BigDecimal expenses) {
     this.expenses = expenses;
   }
 
+  /**
+   * Sets income.
+   *
+   * @param income the income
+   */
   public void setIncome(BigDecimal income) {
     this.income = income;
   }
 
+  /**
+   * Sets description.
+   *
+   * @param description the description
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * Sets latitude.
+   *
+   * @param latitude the latitude
+   */
   public void setLatitude(double latitude) {
     this.latitude = latitude;
   }
 
+  /**
+   * Sets longitude.
+   *
+   * @param longitude the longitude
+   */
   public void setLongitude(double longitude) {
     this.longitude = longitude;
   }

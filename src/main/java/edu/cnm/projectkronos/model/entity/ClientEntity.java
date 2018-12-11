@@ -22,6 +22,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Client entity.
+ */
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -48,11 +51,21 @@ public class ClientEntity implements BaseClient {
   @JsonIgnore
   private String userId;
 
+  /**
+   * Gets user id.
+   *
+   * @return the user id
+   */
   @JsonIgnore
   public String getUserId() {
     return userId;
   }
 
+  /**
+   * Sets user id.
+   *
+   * @param userId the user id
+   */
   @JsonIgnore
   public void setUserId(String userId) {
     this.userId = userId;
@@ -73,6 +86,11 @@ public class ClientEntity implements BaseClient {
     ClientEntity.entityLinks = entityLinks;
   }
 
+  /**
+   * Gets entity links.
+   *
+   * @return the entity links
+   */
   public static EntityLinks getEntityLinks() {
     return entityLinks;
   }
@@ -110,39 +128,84 @@ public class ClientEntity implements BaseClient {
     return notes;
   }
 
+  /**
+   * Gets projects.
+   *
+   * @return the projects
+   */
   @JsonSerialize(contentAs = BaseProject.class)
   public List<ProjectEntity> getProjects() {
     return projects;
   }
 
+  /**
+   * Sets uuid.
+   *
+   * @param uuid the uuid
+   */
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
   }
 
+  /**
+   * Sets name.
+   *
+   * @param name the name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Sets phone.
+   *
+   * @param phone the phone
+   */
   public void setPhone(String phone) {
     this.phone = phone;
   }
 
+  /**
+   * Sets alt phone.
+   *
+   * @param altPhone the alt phone
+   */
   public void setAltPhone(String altPhone) {
     this.altPhone = altPhone;
   }
 
+  /**
+   * Sets email.
+   *
+   * @param email the email
+   */
   public void setEmail(String email) {
     this.email = email;
   }
 
+  /**
+   * Sets address.
+   *
+   * @param address the address
+   */
   public void setAddress(String address) {
     this.address = address;
   }
 
+  /**
+   * Sets alt address.
+   *
+   * @param altAddress the alt address
+   */
   public void setAltAddress(String altAddress) {
     this.altAddress = altAddress;
   }
 
+  /**
+   * Sets notes.
+   *
+   * @param notes the notes
+   */
   public void setNotes(String notes) {
     this.notes = notes;
   }

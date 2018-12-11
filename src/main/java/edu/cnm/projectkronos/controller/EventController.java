@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The type Event controller.
+ */
 @ExposesResourceFor(EventEntity.class)
 @RestController
 @RequestMapping("/events")
@@ -36,6 +39,13 @@ public class EventController {
   private EventRepository eventRepository;
   private EquipmentRepository equipmentRepository;
 
+  /**
+   * Instantiates a new Event controller.
+   *
+   * @param projectRepository the project repository
+   * @param eventRepository the event repository
+   * @param equipmentRepository the equipment repository
+   */
   public EventController(ProjectRepository projectRepository,
       EventRepository eventRepository, EquipmentRepository equipmentRepository) {
     this.projectRepository = projectRepository;
@@ -43,7 +53,13 @@ public class EventController {
     this.equipmentRepository = equipmentRepository;
   }
 
-  //Get event
+  /**
+   * Gets event.
+   *
+   * @param eventId the event id
+   * @return the event
+   */
+//Get event
   @ApiOperation(value = "Get an Event", notes = "Returns a single Event")
   @GetMapping(value = "{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public EventEntity getEvent(@ApiParam(value = "Event Id") @PathVariable("eventId") UUID eventId) {
@@ -52,7 +68,13 @@ public class EventController {
     return eventRepository.findByUserIdAndUuid(userId, eventId);
   }
 
-  // Get list of Equipment for an event
+  /**
+   * Equipment equipment entity.
+   *
+   * @param eventId the event id
+   * @return the equipment entity
+   */
+// Get list of Equipment for an event
   @ApiOperation(value = "Get Event Equipment", notes = "Returns the Equipment associated with a single event.")
   @GetMapping(value = "{eventId}/equipment", produces = MediaType.APPLICATION_JSON_VALUE)
   public EquipmentEntity equipment(
@@ -60,7 +82,14 @@ public class EventController {
     return getEvent(eventId).getEquipment();
   }
 
-  //Post equipment to event
+  /**
+   * Post event equipment response entity.
+   *
+   * @param eventId the event id
+   * @param partialEquipment the partial equipment
+   * @return the response entity
+   */
+//Post equipment to event
   @ApiOperation(value = "Post Event Equipment", notes = "Associates an Equipment entity with a single Event.")
   @PostMapping(value = "{eventId}/equipment", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
@@ -80,6 +109,11 @@ public class EventController {
     return ResponseEntity.created(event.getHref()).body(event);
   }
 
+  /**
+   * Delete event.
+   *
+   * @param eventId the event id
+   */
   @ApiOperation(value = "Delete an Event", notes = "Deletes an Event without deleting the project associated with the Event.")
   @Transactional
   @DeleteMapping(value = "{eventId}")
@@ -97,6 +131,9 @@ public class EventController {
   }
 
 
+  /**
+   * Not found.
+   */
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)
   public void notFound() {

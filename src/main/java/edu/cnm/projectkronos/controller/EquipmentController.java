@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The type Equipment controller.
+ */
 @RestController
 @RequestMapping("/equipment")
 @ExposesResourceFor(EquipmentEntity.class)
@@ -32,6 +35,11 @@ public class EquipmentController {
 
   private EquipmentRepository equipmentRepository;
 
+  /**
+   * Instantiates a new Equipment controller.
+   *
+   * @param equipmentRepository the equipment repository
+   */
   @Autowired
   public EquipmentController(EquipmentRepository equipmentRepository) {
     this.equipmentRepository = equipmentRepository;
@@ -43,7 +51,12 @@ public class EquipmentController {
     this.equipmentRepository.save(noneEquipment);
   }
 
-  //Get the list of equipment
+  /**
+   * List list.
+   *
+   * @return the list
+   */
+//Get the list of equipment
   @ApiOperation(value = "Get equipment list", notes = "Returns thew list of all equipment associated with the user.")
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<EquipmentEntity> list() {
@@ -59,7 +72,13 @@ public class EquipmentController {
     return equipmentRepository.findAllByUserIdOrderByNameAsc(userId);
   }
 
-  //Get equipment
+  /**
+   * Gets equipment.
+   *
+   * @param equipmentId the equipment id
+   * @return the equipment
+   */
+//Get equipment
   @ApiOperation(value = "Get Equipment", notes = "Returns a single equipment entity")
   @GetMapping(value = "{equipmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public EquipmentEntity getEquipment(
@@ -69,7 +88,13 @@ public class EquipmentController {
     return equipmentRepository.findByUserIdAndUuid(userId, equipmentId);
   }
 
-  //Post Equipment
+  /**
+   * Post equipment response entity.
+   *
+   * @param equipment the equipment
+   * @return the response entity
+   */
+//Post Equipment
   @ApiOperation(value = "Post Equipment", notes = "Post an Equipment entity to the API.")
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
@@ -82,6 +107,11 @@ public class EquipmentController {
     return ResponseEntity.created(equipment.getHref()).body(equipment);
   }
 
+  /**
+   * Delete equipment.
+   *
+   * @param equipmentId the equipment id
+   */
   @ApiOperation(value = "Delete equipoment", notes = "Deletes a single Equipment entity.")
   @Transactional
   @DeleteMapping(value = "{equipmentId}")
@@ -93,6 +123,9 @@ public class EquipmentController {
   }
 
 
+  /**
+   * Not found.
+   */
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)
   public void notFound() {

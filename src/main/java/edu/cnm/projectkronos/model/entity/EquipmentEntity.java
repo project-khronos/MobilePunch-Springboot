@@ -22,6 +22,9 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Equipment entity.
+ */
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -45,11 +48,21 @@ public class EquipmentEntity implements BaseEquipment {
   @JsonIgnore
   private String userId;
 
+  /**
+   * Gets user id.
+   *
+   * @return the user id
+   */
   @JsonIgnore
   public String getUserId() {
     return userId;
   }
 
+  /**
+   * Sets user id.
+   *
+   * @param userId the user id
+   */
   @JsonIgnore
   public void setUserId(String userId) {
     this.userId = userId;
@@ -72,6 +85,11 @@ public class EquipmentEntity implements BaseEquipment {
     EquipmentEntity.entityLinks = entityLinks;
   }
 
+  /**
+   * Gets entity links.
+   *
+   * @return the entity links
+   */
   public static EntityLinks getEntityLinks() {
     return entityLinks;
   }
@@ -109,36 +127,76 @@ public class EquipmentEntity implements BaseEquipment {
     return mfcyear;
   }
 
+  /**
+   * Gets events.
+   *
+   * @return the events
+   */
   @JsonSerialize(contentAs = BaseEvent.class)
   public List<EventEntity> getEvents() {
     return events;
   }
 
+  /**
+   * Sets mfcyear.
+   *
+   * @param mfcyear the mfcyear
+   */
   public void setMfcyear(String mfcyear) {
     this.mfcyear = mfcyear;
   }
 
+  /**
+   * Sets uuid.
+   *
+   * @param uuid the uuid
+   */
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
   }
 
+  /**
+   * Sets name.
+   *
+   * @param name the name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Sets identification.
+   *
+   * @param identification the identification
+   */
   public void setIdentification(String identification) {
     this.identification = identification;
   }
 
+  /**
+   * Sets make.
+   *
+   * @param make the make
+   */
   public void setMake(String make) {
     this.make = make;
   }
 
+  /**
+   * Sets model.
+   *
+   * @param model the model
+   */
   public void setModel(String model) {
     this.model = model;
   }
 
 
+  /**
+   * Sets description.
+   *
+   * @param description the description
+   */
   public void setDescription(String description) {
     this.description = description;
   }

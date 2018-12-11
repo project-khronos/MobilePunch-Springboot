@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The type Client controller.
+ */
 @ExposesResourceFor(ClientEntity.class)
 @RestController
 @RequestMapping("/clients")
@@ -35,13 +38,25 @@ public class ClientController {
   private ClientRepository clientRepository;
   private ProjectRepository projectRepository;
 
+  /**
+   * Instantiates a new Client controller.
+   *
+   * @param clientRepository the client repository
+   * @param projectRepository the project repository
+   */
   @Autowired
   public ClientController(ClientRepository clientRepository, ProjectRepository projectRepository) {
     this.clientRepository = clientRepository;
     this.projectRepository = projectRepository;
   }
 
-  // Post a client
+  /**
+   * Post client response entity.
+   *
+   * @param client the client
+   * @return the response entity
+   */
+// Post a client
   @ApiOperation(value = "Post a Client", notes = "Posts a Client entity to the api taking into account the user to whom the client record belongs to.")
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,7 +68,12 @@ public class ClientController {
     return ResponseEntity.created(client.getHref()).body(client);
   }
 
-  //Gets List of Clients
+  /**
+   * List list.
+   *
+   * @return the list
+   */
+//Gets List of Clients
   @ApiOperation(value = "Get the List of Clients", notes = "Returns the list Clients associated with the user.")
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<ClientEntity> list() {
@@ -62,7 +82,13 @@ public class ClientController {
     return clientRepository.findAllByUserIdOrderByNameAsc(userId);
   }
 
-  // Get Client
+  /**
+   * Gets client.
+   *
+   * @param clientId the client id
+   * @return the client
+   */
+// Get Client
   @ApiOperation(value = "Get a Client.", notes = "Returns a single Client.")
   @GetMapping(value = "{clientId}")
   public ClientEntity getClient(
@@ -72,7 +98,13 @@ public class ClientController {
     return clientRepository.findByUuidAndUserId(clientId, userId);
   }
 
-  //Get list of getProjects for a client
+  /**
+   * Gets projects.
+   *
+   * @param clientId the client id
+   * @return the projects
+   */
+//Get list of getProjects for a client
   @ApiOperation(value = "List of Projects", notes = "Returns a list of Projects associated with a the specified Client.")
   @GetMapping(value = "{clientId}/projects")
   public List<ProjectEntity> getProjects(
@@ -80,7 +112,12 @@ public class ClientController {
     return getClient(clientId).getProjects();
   }
 
-  //Delete a client
+  /**
+   * Delete client.
+   *
+   * @param clientId the client id
+   */
+//Delete a client
   @ApiOperation(value = "Delete a client", notes = "Delete a specified Client.")
   @Transactional
   @DeleteMapping(value = "{clientId}")
@@ -97,6 +134,9 @@ public class ClientController {
   }
 
 
+  /**
+   * Not found.
+   */
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)
   public void notFound() {

@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Image entity.
+ */
 @Entity
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -35,18 +38,38 @@ public class ImageEntity {
     ImageEntity.entityLinks = entityLinks;
   }
 
+  /**
+   * Gets uuid.
+   *
+   * @return the uuid
+   */
   public UUID getUuid() {
     return uuid;
   }
 
+  /**
+   * Gets description.
+   *
+   * @return the description
+   */
   public String getDescription() {
     return description;
   }
 
+  /**
+   * Sets description.
+   *
+   * @param description the description
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * Gets href.
+   *
+   * @return the href
+   */
   public URI getHref() {
     return entityLinks.linkForSingleResource(ImageEntity.class, uuid).toUri();
   }
