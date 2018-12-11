@@ -65,16 +65,24 @@ Allow users to save images with events.
 
 Not Applicable.
 
-## Wireframes
+## Wireframes and User Stories
 
 Not Applicable.
 
+## ERD 
 
+## DDL
 
+## Javadoc
 
-
-
-
-
+## Rest Documentation
 
 [Rest Api Documentation](docs/rest/api.md)
+
+## Licenses
+
+## Instructions for Building
+
+## Instructions for Using This Component
+
+
