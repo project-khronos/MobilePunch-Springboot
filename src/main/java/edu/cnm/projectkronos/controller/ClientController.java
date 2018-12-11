@@ -4,7 +4,6 @@ import edu.cnm.projectkronos.model.dao.ClientRepository;
 import edu.cnm.projectkronos.model.dao.ProjectRepository;
 import edu.cnm.projectkronos.model.entity.ClientEntity;
 import edu.cnm.projectkronos.model.entity.ProjectEntity;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.List;

@@ -45,7 +45,6 @@ public class ProjectEntity implements BaseProject {
   private String description;
 
   @JsonIgnore
-  @Id
   private String userId;
 
   @JsonIgnore

@@ -6,6 +6,8 @@ import edu.cnm.projectkronos.model.dao.ProjectRepository;
 import edu.cnm.projectkronos.model.entity.EquipmentEntity;
 import edu.cnm.projectkronos.model.entity.EventEntity;
 import edu.cnm.projectkronos.model.entity.ProjectEntity;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 import javax.transaction.Transactional;
@@ -42,23 +44,28 @@ public class EventController {
   }
 
   //Get event
+  @ApiOperation(value = "Get an Event", notes = "Returns a single Event")
   @GetMapping(value = "{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public EventEntity getEvent(@PathVariable("eventId") UUID eventId) {
+  public EventEntity getEvent(@ApiParam(value = "Event Id") @PathVariable("eventId") UUID eventId) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());
     return eventRepository.findByUserIdAndUuid(userId, eventId);
   }
 
   // Get list of Equipment for an event
+  @ApiOperation(value = "Get Event Equipment", notes = "Returns the Equipment associated with a single event.")
   @GetMapping(value = "{eventId}/equipment", produces = MediaType.APPLICATION_JSON_VALUE)
-  public EquipmentEntity equipment(@PathVariable("eventId") UUID eventId) {
+  public EquipmentEntity equipment(
+      @ApiParam(value = "Event Id") @PathVariable("eventId") UUID eventId) {
     return getEvent(eventId).getEquipment();
   }
 
   //Post equipment to event
+  @ApiOperation(value = "Post Event Equipment", notes = "Associates an Equipment entity with a single Event.")
   @PostMapping(value = "{eventId}/equipment", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EventEntity> postEventEquipment(@PathVariable("eventId") UUID eventId,
+  public ResponseEntity<EventEntity> postEventEquipment(
+      @ApiParam(value = "Event Id") @PathVariable("eventId") UUID eventId,
       @RequestBody EquipmentEntity partialEquipment) {
 
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -73,10 +80,12 @@ public class EventController {
     return ResponseEntity.created(event.getHref()).body(event);
   }
 
+  @ApiOperation(value = "Delete an Event", notes = "Deletes an Event without deleting the project associated with the Event.")
   @Transactional
   @DeleteMapping(value = "{eventId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteEvent(@PathVariable("eventId") UUID eventId) {
+  public void deleteEvent(
+      @ApiParam(value = "Event Id", required = true) @PathVariable("eventId") UUID eventId) {
     EventEntity event = getEvent(eventId);
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());

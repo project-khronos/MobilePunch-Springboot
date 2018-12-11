@@ -2,6 +2,8 @@ package edu.cnm.projectkronos.controller;
 
 import edu.cnm.projectkronos.model.dao.EquipmentRepository;
 import edu.cnm.projectkronos.model.entity.EquipmentEntity;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -42,6 +44,7 @@ public class EquipmentController {
   }
 
   //Get the list of equipment
+  @ApiOperation(value = "Get equipment list", notes = "Returns thew list of all equipment associated with the user.")
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public List<EquipmentEntity> list() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -57,17 +60,21 @@ public class EquipmentController {
   }
 
   //Get equipment
+  @ApiOperation(value = "Get Equipment", notes = "Returns a single equipment entity")
   @GetMapping(value = "{equipmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public EquipmentEntity getEquipment(@PathVariable("equipmentId") UUID equipmentId) {
+  public EquipmentEntity getEquipment(
+      @ApiParam(value = "Equipment Id", required = true) @PathVariable("equipmentId") UUID equipmentId) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());
     return equipmentRepository.findByUserIdAndUuid(userId, equipmentId);
   }
 
   //Post Equipment
+  @ApiOperation(value = "Post Equipment", notes = "Post an Equipment entity to the API.")
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EquipmentEntity> postEquipment(@RequestBody EquipmentEntity equipment) {
+  public ResponseEntity<EquipmentEntity> postEquipment(
+      @ApiParam(value = "Partial equipment definition", required = true) @RequestBody EquipmentEntity equipment) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String userId = ((String) auth.getPrincipal());
     equipment.setUserId(userId);
@@ -75,10 +82,12 @@ public class EquipmentController {
     return ResponseEntity.created(equipment.getHref()).body(equipment);
   }
 
+  @ApiOperation(value = "Delete equipoment", notes = "Deletes a single Equipment entity.")
   @Transactional
   @DeleteMapping(value = "{equipmentId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteEquipment(@PathVariable("equipmentId") UUID equipmentId) {
+  public void deleteEquipment(
+      @ApiParam(value = "Equipment ID", required = true) @PathVariable("equipmentId") UUID equipmentId) {
     EquipmentEntity equipment = getEquipment(equipmentId);
     equipmentRepository.delete(equipment);
   }

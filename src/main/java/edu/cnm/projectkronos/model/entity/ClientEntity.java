@@ -45,7 +45,6 @@ public class ClientEntity implements BaseClient {
   private String notes;
 
   @JsonIgnore
-  @Id
   private String userId;
 
   @JsonIgnore
