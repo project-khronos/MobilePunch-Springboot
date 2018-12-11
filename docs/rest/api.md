@@ -2020,11 +2020,11 @@ Associates a new Event with a single Project.
         </tr>
     
         <tr>
-            <td><strong>href</strong></td>
+            <td><strong>year</strong></td>
             <td>
                 
                     
-                    string (uri)
+                    string
                 
             </td>
             <td>
@@ -2035,11 +2035,11 @@ Associates a new Event with a single Project.
         </tr>
     
         <tr>
-            <td><strong>year</strong></td>
+            <td><strong>href</strong></td>
             <td>
                 
                     
-                    string
+                    string (uri)
                 
             </td>
             <td>
@@ -2203,21 +2203,6 @@ Associates a new Event with a single Project.
         </tr>
     
         <tr>
-            <td><strong>event_id</strong></td>
-            <td>
-                
-                    
-                    string (uuid)
-                
-            </td>
-            <td>
-              required
-            </td>
-            <td>Event ID</td>
-            <!--<td></td>-->
-        </tr>
-    
-        <tr>
             <td><strong>href</strong></td>
             <td>
                 
@@ -2229,6 +2214,21 @@ Associates a new Event with a single Project.
               optional
             </td>
             <td>-</td>
+            <!--<td></td>-->
+        </tr>
+    
+        <tr>
+            <td><strong>event_id</strong></td>
+            <td>
+                
+                    
+                    string (uuid)
+                
+            </td>
+            <td>
+              required
+            </td>
+            <td>Event ID</td>
             <!--<td></td>-->
         </tr>
     

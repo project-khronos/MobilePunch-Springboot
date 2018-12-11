@@ -462,11 +462,11 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/EventEntity"
+      year:
+        type: "string"
       href:
         type: "string"
         format: "uri"
-      year:
-        type: "string"
   EventEntity:
     type: "object"
     required:
@@ -495,13 +495,13 @@ definitions:
         $ref: "#/definitions/ProjectEntity"
       equipment:
         $ref: "#/definitions/EquipmentEntity"
+      href:
+        type: "string"
+        format: "uri"
       event_id:
         type: "string"
         format: "uuid"
         description: "Event ID"
-      href:
-        type: "string"
-        format: "uri"
   ProjectEntity:
     type: "object"
     required:
