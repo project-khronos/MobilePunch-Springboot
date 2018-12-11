@@ -99,10 +99,12 @@ public class EquipmentEntity implements BaseEquipment {
     return uuid;
   }
 
+  @ApiModelProperty(required = true)
   public String getName() {
     return name;
   }
 
+  @ApiModelProperty(required = true)
   public String getIdentification() {
     return identification;
   }
@@ -128,7 +130,7 @@ public class EquipmentEntity implements BaseEquipment {
   }
 
   /**
-   * Gets events.
+   * Gets events associated with the Equipment.
    *
    * @return the events
    */

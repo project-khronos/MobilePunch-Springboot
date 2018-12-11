@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The type Project controller.
+ * The Project controller.
  */
 @ExposesResourceFor(ProjectEntity.class)
 @RestController
@@ -58,13 +58,13 @@ public class ProjectController {
   }
 
   /**
-   * Post project response entity.
+   * Posts a Project entity to the api taking into account the user to whom the Project record belongs to.
    *
-   * @param project the project
+   * @param project Partial Project Definition
    * @return the response entity
    */
 // Post Project
-  @ApiOperation(value = "Post a Project", notes = "Posts a Project entity to the api taking into account the user to whom the Project record belongs to")
+  @ApiOperation(value = "Post a Project", notes = "Posts a Project entity to the api taking into account the user to whom the Project record belongs to.")
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ProjectEntity> postProject(
@@ -77,9 +77,9 @@ public class ProjectController {
   }
 
   /**
-   * List list.
+   * Returns a list of Projects associated to the user.
    *
-   * @return the list
+   * @return the Projects list
    */
 // Get Projects
   @ApiOperation(value = "Get Projects", notes = "Returns a list of Projects associated to the user.")
@@ -91,7 +91,7 @@ public class ProjectController {
   }
 
   /**
-   * Gets project.
+   * Returns a single Project.
    *
    * @param projectId the project id
    * @return the project
@@ -107,10 +107,10 @@ public class ProjectController {
   }
 
   /**
-   * Post client response entity.
+   * Post, associates a single Client to a single Project.
    *
    * @param projectId the project id
-   * @param partialClient the partial client
+   * @param partialClient Client Id
    * @return the response entity
    */
 // Post a client to project
@@ -132,10 +132,10 @@ public class ProjectController {
   }
 
   /**
-   * Post event response entity.
+   * Post, associates a new Event with a single Project.
    *
    * @param projectId the project id
-   * @param event the event
+   * @param event Partial Event definition
    * @return the response entity
    */
 // Post event to a project
@@ -152,10 +152,10 @@ public class ProjectController {
   }
 
   /**
-   * Gets events.
+   * Returns the list of Events associated with a single Project.
    *
    * @param projectId the project id
-   * @return the events
+   * @return Events associated with the Project
    */
 // Get Events for a Project
   @ApiOperation(value = "Get Project Events", notes = "Returns the list of Events associated with a single Project.")
@@ -166,10 +166,10 @@ public class ProjectController {
   }
 
   /**
-   * Gets clients.
+   * Returns the Client associated with the Project
    *
    * @param projectId the project id
-   * @return the clients
+   * @return the Client associated with the Project
    */
 // Get Client for project
   @ApiOperation(value = "Get Project Client", notes = "Returns the Client associated with the Project.")
@@ -180,7 +180,7 @@ public class ProjectController {
   }
 
   /**
-   * Delete project.
+   * Delete a Project and its Events.
    *
    * @param projectId the project id
    */
@@ -200,7 +200,7 @@ public class ProjectController {
 
 
   /**
-   * Not found.
+   * Returns a Resource not found response if the request is improperly formatted.
    */
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)

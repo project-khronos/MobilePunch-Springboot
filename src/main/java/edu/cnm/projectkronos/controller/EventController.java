@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The type Event controller.
+ * The Event controller.
  */
 @ExposesResourceFor(EventEntity.class)
 @RestController
@@ -54,13 +54,13 @@ public class EventController {
   }
 
   /**
-   * Gets event.
+   * Returns a single Event
    *
    * @param eventId the event id
    * @return the event
    */
 //Get event
-  @ApiOperation(value = "Get an Event", notes = "Returns a single Event")
+  @ApiOperation(value = "Get an Event", notes = "Returns a single Event.")
   @GetMapping(value = "{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public EventEntity getEvent(@ApiParam(value = "Event Id") @PathVariable("eventId") UUID eventId) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -69,7 +69,7 @@ public class EventController {
   }
 
   /**
-   * Equipment equipment entity.
+   * Returns the Equipment associated with a single event.
    *
    * @param eventId the event id
    * @return the equipment entity
@@ -83,10 +83,10 @@ public class EventController {
   }
 
   /**
-   * Post event equipment response entity.
+   * Post, associates an Equipment entity with a single Event.
    *
    * @param eventId the event id
-   * @param partialEquipment the partial equipment
+   * @param partialEquipment Equipment Id
    * @return the response entity
    */
 //Post equipment to event
@@ -95,6 +95,7 @@ public class EventController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<EventEntity> postEventEquipment(
       @ApiParam(value = "Event Id") @PathVariable("eventId") UUID eventId,
+      @ApiParam(value = "Equipment Id", required = true)
       @RequestBody EquipmentEntity partialEquipment) {
 
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -110,7 +111,7 @@ public class EventController {
   }
 
   /**
-   * Delete event.
+   * Deletes an Event without deleting the project associated with the Event.
    *
    * @param eventId the event id
    */
@@ -132,7 +133,7 @@ public class EventController {
 
 
   /**
-   * Not found.
+   * Returns a Resource not found response if the request is improperly formatted.
    */
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)

@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The type Equipment controller.
+ * The Equipment controller.
  */
 @RestController
 @RequestMapping("/equipment")
@@ -52,9 +52,9 @@ public class EquipmentController {
   }
 
   /**
-   * List list.
+   * Returns thew list of all equipment associated with the user.
    *
-   * @return the list
+   * @return the equipment list
    */
 //Get the list of equipment
   @ApiOperation(value = "Get equipment list", notes = "Returns thew list of all equipment associated with the user.")
@@ -73,13 +73,13 @@ public class EquipmentController {
   }
 
   /**
-   * Gets equipment.
+   * Returns a single equipment entity.
    *
    * @param equipmentId the equipment id
    * @return the equipment
    */
 //Get equipment
-  @ApiOperation(value = "Get Equipment", notes = "Returns a single equipment entity")
+  @ApiOperation(value = "Get Equipment", notes = "Returns a single equipment entity.")
   @GetMapping(value = "{equipmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public EquipmentEntity getEquipment(
       @ApiParam(value = "Equipment Id", required = true) @PathVariable("equipmentId") UUID equipmentId) {
@@ -89,9 +89,9 @@ public class EquipmentController {
   }
 
   /**
-   * Post equipment response entity.
+   * Post an Equipment entity to the API.
    *
-   * @param equipment the equipment
+   * @param equipment Partial equipment definition
    * @return the response entity
    */
 //Post Equipment
@@ -108,7 +108,7 @@ public class EquipmentController {
   }
 
   /**
-   * Delete equipment.
+   * Deletes a single Equipment entity.
    *
    * @param equipmentId the equipment id
    */
@@ -124,7 +124,7 @@ public class EquipmentController {
 
 
   /**
-   * Not found.
+   * Returns a Resource not found response if the request is improperly formatted.
    */
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)

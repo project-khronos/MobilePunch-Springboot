@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The type Client controller.
+ * The Client controller.
  */
 @ExposesResourceFor(ClientEntity.class)
 @RestController
@@ -51,9 +51,9 @@ public class ClientController {
   }
 
   /**
-   * Post client response entity.
+   * Posts a Client entity to the api taking into account the user to whom the client record belongs to.
    *
-   * @param client the client
+   * @param client Partial Client definition
    * @return the response entity
    */
 // Post a client
@@ -69,9 +69,8 @@ public class ClientController {
   }
 
   /**
-   * List list.
-   *
-   * @return the list
+   *  Get mapping for the list of clients.
+   * @return the list Clients associated with the user
    */
 //Gets List of Clients
   @ApiOperation(value = "Get the List of Clients", notes = "Returns the list Clients associated with the user.")
@@ -83,7 +82,7 @@ public class ClientController {
   }
 
   /**
-   * Gets client.
+   * Returns a single Client.
    *
    * @param clientId the client id
    * @return the client
@@ -99,10 +98,10 @@ public class ClientController {
   }
 
   /**
-   * Gets projects.
+   * Returns a list of Projects associated with a the specified Client.
    *
    * @param clientId the client id
-   * @return the projects
+   * @return List of Projects
    */
 //Get list of getProjects for a client
   @ApiOperation(value = "List of Projects", notes = "Returns a list of Projects associated with a the specified Client.")
@@ -113,7 +112,7 @@ public class ClientController {
   }
 
   /**
-   * Delete client.
+   * Delete a specified Client.
    *
    * @param clientId the client id
    */
@@ -135,7 +134,7 @@ public class ClientController {
 
 
   /**
-   * Not found.
+   * Returns a Resource not found response if the request is improperly formatted.
    */
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
   @ExceptionHandler(NoSuchElementException.class)

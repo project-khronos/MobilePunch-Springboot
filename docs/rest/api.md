@@ -659,7 +659,7 @@ Post an Equipment entity to the API.
 
 Get Equipment
 
-Returns a single equipment entity
+Returns a single equipment entity.
 
 
 
@@ -808,7 +808,7 @@ Deletes a single Equipment entity.
 
 Get an Event
 
-Returns a single Event
+Returns a single Event.
 
 
 
@@ -1076,8 +1076,8 @@ Associates an Equipment entity with a single Event.
 <tr>
     <td><strong>body</strong></td>
     <td>body</td>
-    <td>no</td>
-    <td></td>
+    <td>yes</td>
+    <td>Equipment Id</td>
     <td></td>
 
     <td>
@@ -1157,7 +1157,7 @@ Returns a list of Projects associated to the user.
 
 Post a Project
 
-Posts a Project entity to the api taking into account the user to whom the Project record belongs to
+Posts a Project entity to the api taking into account the user to whom the Project record belongs to.
 
 
 
@@ -1751,7 +1751,7 @@ Associates a new Event with a single Project.
                 
             </td>
             <td>
-              optional
+              required
             </td>
             <td>-</td>
             <!--<td></td>-->
@@ -1766,7 +1766,7 @@ Associates a new Event with a single Project.
                 
             </td>
             <td>
-              optional
+              required
             </td>
             <td>-</td>
             <!--<td></td>-->
@@ -1921,7 +1921,7 @@ Associates a new Event with a single Project.
                 
             </td>
             <td>
-              optional
+              required
             </td>
             <td>-</td>
             <!--<td></td>-->
@@ -1936,7 +1936,7 @@ Associates a new Event with a single Project.
                 
             </td>
             <td>
-              optional
+              required
             </td>
             <td>-</td>
             <!--<td></td>-->
@@ -2076,7 +2076,7 @@ Associates a new Event with a single Project.
                 
             </td>
             <td>
-              optional
+              required
             </td>
             <td>-</td>
             <!--<td></td>-->
@@ -2203,21 +2203,6 @@ Associates a new Event with a single Project.
         </tr>
     
         <tr>
-            <td><strong>href</strong></td>
-            <td>
-                
-                    
-                    string (uri)
-                
-            </td>
-            <td>
-              optional
-            </td>
-            <td>-</td>
-            <!--<td></td>-->
-        </tr>
-    
-        <tr>
             <td><strong>event_id</strong></td>
             <td>
                 
@@ -2229,6 +2214,21 @@ Associates a new Event with a single Project.
               required
             </td>
             <td>Event ID</td>
+            <!--<td></td>-->
+        </tr>
+    
+        <tr>
+            <td><strong>href</strong></td>
+            <td>
+                
+                    
+                    string (uri)
+                
+            </td>
+            <td>
+              optional
+            </td>
+            <td>-</td>
             <!--<td></td>-->
         </tr>
     
@@ -2274,7 +2274,7 @@ Associates a new Event with a single Project.
                 
             </td>
             <td>
-              optional
+              required
             </td>
             <td>-</td>
             <!--<td></td>-->
@@ -2289,7 +2289,7 @@ Associates a new Event with a single Project.
                 
             </td>
             <td>
-              optional
+              required
             </td>
             <td>-</td>
             <!--<td></td>-->

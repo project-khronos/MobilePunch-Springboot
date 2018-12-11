@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
- * The type Mobile punch back end application.
+ * The Mobile punch back end application class.
  */
 @EnableWebSecurity
 @EnableResourceServer

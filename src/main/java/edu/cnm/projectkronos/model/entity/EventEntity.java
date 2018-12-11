@@ -106,6 +106,7 @@ public class EventEntity implements BaseEvent {
     return uuid;
   }
 
+  @ApiModelProperty(required = true)
   public Date getStartTime() {
     return startTime;
   }

@@ -189,7 +189,7 @@
     "/equipment/{equipmentId}": {
       "get": {
         "summary": "Get Equipment",
-        "description": "Returns a single equipment entity",
+        "description": "Returns a single equipment entity.",
         "operationId": "getEquipment",
         "produces": [
           "application/json"
@@ -237,7 +237,7 @@
     "/events/{eventId}": {
       "get": {
         "summary": "Get an Event",
-        "description": "Returns a single Event",
+        "description": "Returns a single Event.",
         "operationId": "getEvent",
         "produces": [
           "application/json"
@@ -331,7 +331,8 @@
           {
             "in": "body",
             "name": "body",
-            "required": false,
+            "description": "Equipment Id",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/EquipmentEntity"
             }
@@ -369,7 +370,7 @@
       },
       "post": {
         "summary": "Post a Project",
-        "description": "Posts a Project entity to the api taking into account the user to whom the Project record belongs to",
+        "description": "Posts a Project entity to the api taking into account the user to whom the Project record belongs to.",
         "operationId": "postProject",
         "consumes": [
           "application/json"
@@ -583,6 +584,8 @@
     "ClientEntity": {
       "type": "object",
       "required": [
+        "name",
+        "phone",
         "uuid"
       ],
       "properties": {
@@ -627,6 +630,8 @@
     "EquipmentEntity": {
       "type": "object",
       "required": [
+        "identification",
+        "name",
         "uuid"
       ],
       "properties": {
@@ -671,7 +676,8 @@
     "EventEntity": {
       "type": "object",
       "required": [
-        "event_id"
+        "event_id",
+        "startTime"
       ],
       "properties": {
         "startTime": {
@@ -705,20 +711,22 @@
         "equipment": {
           "$ref": "#/definitions/EquipmentEntity"
         },
-        "href": {
-          "type": "string",
-          "format": "uri"
-        },
         "event_id": {
           "type": "string",
           "format": "uuid",
           "description": "Event ID"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
         }
       }
     },
     "ProjectEntity": {
       "type": "object",
       "required": [
+        "name",
+        "startTime",
         "uuid"
       ],
       "properties": {

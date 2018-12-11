@@ -106,10 +106,12 @@ public class ProjectEntity implements BaseProject {
     return uuid;
   }
 
+  @ApiModelProperty(required = true)
   public String getName() {
     return name;
   }
 
+  @ApiModelProperty(required = true)
   public Date getStartTime() {
     return startTime;
   }
@@ -137,7 +139,7 @@ public class ProjectEntity implements BaseProject {
   }
 
   /**
-   * Gets events.
+   * Gets events associated with the Project.
    *
    * @return the events
    */

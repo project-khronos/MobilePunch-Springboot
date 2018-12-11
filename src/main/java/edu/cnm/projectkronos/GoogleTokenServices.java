@@ -28,7 +28,7 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 import org.springframework.stereotype.Component;
 
 /**
- * The type Google token services.
+ * The Google token services.
  */
 @Component
 public class GoogleTokenServices implements ResourceServerTokenServices {

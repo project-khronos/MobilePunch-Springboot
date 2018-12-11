@@ -23,7 +23,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 /**
- * The type Client entity.
+ * The Client entity.
  */
 @Entity
 @Component
@@ -100,10 +100,12 @@ public class ClientEntity implements BaseClient {
     return uuid;
   }
 
+  @ApiModelProperty(required = true)
   public String getName() {
     return name;
   }
 
+  @ApiModelProperty(required = true)
   public String getPhone() {
     return phone;
   }
@@ -129,7 +131,7 @@ public class ClientEntity implements BaseClient {
   }
 
   /**
-   * Gets projects.
+   * Gets projects associated with the client.
    *
    * @return the projects
    */
