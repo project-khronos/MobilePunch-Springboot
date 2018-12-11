@@ -1,0 +1,8 @@
+create table client_entity (client_id CHAR(16) FOR BIT DATA not null, address varchar(255), alt_address varchar(255), alt_phone varchar(255), email varchar(255), name varchar(255), notes varchar(4096), phone varchar(255), user_id varchar(255), primary key (client_id))
+create table equipment_entity (equipment_id CHAR(16) FOR BIT DATA not null, description varchar(255), identification varchar(255), make varchar(255), mfcyear varchar(255), model varchar(255), name varchar(255), user_id varchar(255), primary key (equipment_id))
+create table event_entity (event_id CHAR(16) FOR BIT DATA not null, description varchar(255), end_time timestamp, expenses decimal(19,2), income decimal(19,2), latitude double not null, longitude double not null, start_time timestamp, user_id varchar(255), equipment_equipment_id CHAR(16) FOR BIT DATA, project_id CHAR(16) FOR BIT DATA, primary key (event_id))
+create table image_entity (image_id CHAR(16) FOR BIT DATA not null, description varchar(255), primary key (image_id))
+create table project_entity (project_id CHAR(16) FOR BIT DATA not null, description varchar(255), end_time timestamp, expected_end_time timestamp, name varchar(255), start_time timestamp, user_id varchar(255), client_client_id CHAR(16) FOR BIT DATA, primary key (project_id))
+alter table event_entity add constraint FKn17760wpa8iik6n3chbsdyf0j foreign key (equipment_equipment_id) references equipment_entity
+alter table event_entity add constraint FKm6o0pmsmtunwww5uwwp3yfxte foreign key (project_id) references project_entity
+alter table project_entity add constraint FKjuu4wqlebuwb93pr1hukwag01 foreign key (client_client_id) references client_entity
