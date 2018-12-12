@@ -168,7 +168,7 @@ ALTER TABLE project_entity
 
 [Swagger](https://swagger.io/license/)
 
-* Swagger Maven Plugin by kongchen
+[Swagger Maven Plugin by kongchen](https://github.com/kongchen/swagger-maven-plugin/blob/master/LICENSE)
 
 
 ## Instructions for Building
