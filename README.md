@@ -162,7 +162,7 @@ ALTER TABLE project_entity
 
 [Hibernate](http://hibernate.org/community/license/)
 
-* Jackson
+[Jackson](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 [Derby](http://www.apache.org/licenses/LICENSE-2.0)
 
