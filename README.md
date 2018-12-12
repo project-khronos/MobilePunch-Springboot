@@ -171,7 +171,7 @@ ALTER TABLE project_entity
 [Swagger Maven Plugin by kongchen](https://github.com/kongchen/swagger-maven-plugin/blob/master/LICENSE)
 
 
-## [Instructions for Building](buildbe.pdf)
+## [Instructions for Building](Buildbe.pdf)
 
 
 
