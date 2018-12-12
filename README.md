@@ -159,10 +159,15 @@ ALTER TABLE project_entity
 ## Licenses
 
 [Spring-boot](https://github.com/spring-projects/spring-boot/blob/master/LICENSE.txt)
+
 [Hibernate](http://hibernate.org/community/license/)
+
 * Jackson
+
 [Derby](http://www.apache.org/licenses/LICENSE-2.0)
+
 * Swagger
+
 * Swagger Maven Plugin by kongchen
 
 
