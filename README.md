@@ -179,7 +179,7 @@ ALTER TABLE project_entity
 
 
 ## Instructions for Using This Component
-After building the jar file,
+After building the jar file, move it to the desired location and run by typing java -jar ${FILE_LOCATION}.
 
 
 
