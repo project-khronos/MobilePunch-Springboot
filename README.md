@@ -166,7 +166,7 @@ ALTER TABLE project_entity
 
 [Derby](http://www.apache.org/licenses/LICENSE-2.0)
 
-* Swagger
+[Swagger](https://swagger.io/license/)
 
 * Swagger Maven Plugin by kongchen
 
